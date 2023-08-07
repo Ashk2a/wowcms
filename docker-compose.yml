@@ -1,0 +1,102 @@
+version: '3.9'
+
+name: cms
+
+services:
+    php:
+        container_name: ${COMPOSE_PROJECT_NAME}_php
+        restart: unless-stopped
+        build:
+            args:
+                WWWUSER: '${WWWUSER:-1000}'
+                WWWGROUP: '${WWWGROUP:-1000}'
+            context: .docker/php
+            dockerfile: Dockerfile
+            target: local-php
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        ports:
+            - '${VITE_FORWARDED_PORT:-5173}:5173'
+        volumes:
+            - '.:/var/www/app'
+        networks:
+            - default
+            - proxy
+        depends_on:
+            - mariadb
+            - redis
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=https
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${MAIN_DOMAIN:-cms.local}`) || Host(`${PANEL_DOMAIN:-panel.cms.local}`)
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls=true
+            - traefik.docker.network=proxy
+
+    worker:
+        container_name: ${COMPOSE_PROJECT_NAME}_worker
+        restart: unless-stopped
+        build:
+            args:
+                WWWUSER: '${WWWUSER:-1000}'
+                WWWGROUP: '${WWWGROUP:-1000}'
+            context: .docker/php
+            dockerfile: Dockerfile
+            target: local-worker
+        extra_hosts:
+            - 'host.docker.internal:host-gateway'
+        volumes:
+            - '.:/var/www/app'
+        networks:
+            - default
+        depends_on:
+            - mariadb
+            - redis
+
+    mariadb:
+        container_name: ${COMPOSE_PROJECT_NAME}_mariadb
+        restart: unless-stopped
+        image: mariadb:10
+        volumes:
+            - mariadb:/var/lib/mysql
+        ports:
+            - ${DB_FORWARDED_PORT:-3308}:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+            MYSQL_ROOT_HOST: '%'
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_USER: ${DB_USERNAME}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+        networks:
+            - default
+        healthcheck:
+            test: [ "CMD", "mysqladmin", "ping", "-p${DB_ROOT_PASSWORD:-root}" ]
+            retries: 3
+            timeout: 5s
+
+    redis:
+        container_name: ${COMPOSE_PROJECT_NAME}_redis
+        restart: unless-stopped
+        image: 'redis:alpine'
+        ports:
+            - '${REDIS_FORWARDED_PORT:-6379}:6379'
+        volumes:
+            - 'redis:/data'
+        networks:
+            - default
+        healthcheck:
+            test: [ "CMD", "redis-cli", "ping"]
+            retries: 3
+            timeout: 5s
+
+networks:
+    default:
+        driver: bridge
+        name: ${COMPOSE_PROJECT_NAME}
+    proxy:
+        external: true
+
+volumes:
+    mariadb:
+        driver: local
+    redis:
+        driver: local
