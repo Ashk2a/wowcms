@@ -22,7 +22,11 @@ RUN apk add --no-cache --update \
     curl \
     patch \
     zip \
+    nodejs \
+    npm \
     unzip
+
+RUN npm install --global yarn
 
 # Php extensions manager
 COPY --from=mlocati/php-extension-installer:2.1 /usr/bin/install-php-extensions /usr/bin/
