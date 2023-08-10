@@ -15,8 +15,6 @@ services:
             target: local-php
         extra_hosts:
             - 'host.docker.internal:host-gateway'
-        ports:
-            - '${VITE_FORWARDED_PORT:-5173}:5173'
         volumes:
             - '.:/var/www/app'
         networks:
@@ -25,11 +23,13 @@ services:
         depends_on:
             - mariadb
             - redis
+        expose:
+            - 80
         labels:
             - traefik.enable=true
-            - traefik.http.routers.${COMPOSE_PROJECT_NAME}.entrypoints=https
-            - traefik.http.routers.${COMPOSE_PROJECT_NAME}.rule=Host(`${MAIN_DOMAIN:-cms.local}`) || Host(`${PANEL_DOMAIN:-panel.cms.local}`)
-            - traefik.http.routers.${COMPOSE_PROJECT_NAME}.tls=true
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_php.entrypoints=https
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_php.rule=Host(`${MAIN_DOMAIN:-cms.test}`) || Host(`${PANEL_DOMAIN:-panel.cms.test}`)
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_php.tls=true
             - traefik.docker.network=proxy
 
     worker:
@@ -51,6 +51,22 @@ services:
         depends_on:
             - mariadb
             - redis
+
+    node:
+        container_name: ${COMPOSE_PROJECT_NAME}_node
+        restart: unless-stopped
+        build:
+            context: ./.docker/node
+            dockerfile: Dockerfile
+            target: local-node
+        volumes:
+            - ./:/var/www/app
+        extra_hosts:
+            - host.docker.internal:host-gateway
+        ports:
+            - '${VITE_FORWARDED_PORT:-5173}:5173'
+        networks:
+            - default
 
     mariadb:
         container_name: ${COMPOSE_PROJECT_NAME}_mariadb

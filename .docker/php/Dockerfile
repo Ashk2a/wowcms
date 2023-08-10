@@ -20,7 +20,7 @@ RUN apk add --no-cache --update \
     git \
     make \
     curl \
-    path \
+    patch \
     zip \
     unzip
 
