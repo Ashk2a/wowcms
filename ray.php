@@ -35,7 +35,7 @@ return [
     */
     'send_queries_to_ray' => false,
 
-    /**
+    /*
      * When enabled, all duplicate queries will automatically be sent to Ray.
      */
     'send_duplicate_queries_to_ray' => false,
@@ -50,7 +50,7 @@ return [
     */
     'send_requests_to_ray' => false,
 
-    /**
+    /*
      * When enabled, all Http Client requests made by this app will be automatically sent to Ray.
      */
     'send_http_client_requests_to_ray' => false,

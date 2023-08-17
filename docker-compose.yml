@@ -28,7 +28,7 @@ services:
         labels:
             - traefik.enable=true
             - traefik.http.routers.${COMPOSE_PROJECT_NAME}_php.entrypoints=https
-            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_php.rule=Host(`${MAIN_DOMAIN:-cms.test}`) || Host(`${PANEL_DOMAIN:-panel.cms.test}`)
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_php.rule=Host(`${MAIN_DOMAIN:-cms.test}`) || Host(`${ADMIN_DOMAIN:-admin.cms.test}`)
             - traefik.http.routers.${COMPOSE_PROJECT_NAME}_php.tls=true
             - traefik.docker.network=proxy
 
