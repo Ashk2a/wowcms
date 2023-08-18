@@ -10,3 +10,9 @@
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+use App\Livewire\Pages\Auth\Login;
+use App\Livewire\Pages\Home;
+
+Route::get('/', Home::class)->name('home');
+Route::get('/login', Login::class)->name('auth.login');
