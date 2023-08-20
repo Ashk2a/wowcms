@@ -2,21 +2,16 @@
 
 namespace App\Models;
 
-use App\Enums\RealmDatabaseTypes;
-use Filament\Models\Contracts\HasCurrentTenantLabel;
-use Filament\Models\Contracts\HasName;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
-class Realm extends Model implements HasName, HasCurrentTenantLabel
+class DatabaseCredential extends Model
 {
     use HasFactory;
-    use HasSlug;
 
     //###################################################################################################################
     // ATTRIBUTES
@@ -36,40 +31,26 @@ class Realm extends Model implements HasName, HasCurrentTenantLabel
         return $this->hasMany(RealmDatabase::class);
     }
 
-    public function authDatabase(): HasOne
-    {
-        return $this->getDatabaseOfType(RealmDatabaseTypes::AUTH);
-    }
+    //###################################################################################################################
+    // VIRTUAL ATTRIBUTES
+    //###################################################################################################################
 
-    public function characterDatabase(): HasOne
+    public function url(): Attribute
     {
-        return $this->getDatabaseOfType(RealmDatabaseTypes::CHARACTER);
-    }
-
-    public function worldDatabase(): HasOne
-    {
-        return $this->getDatabaseOfType(RealmDatabaseTypes::WORLD);
-    }
-
-    private function getDatabaseOfType(RealmDatabaseTypes $type): HasOne
-    {
-        return $this->databases()
-            ->one()
-            ->ofMany([], fn (Builder $query) => $query->where('type', $type));
+        return new Attribute(
+            get: fn (): string => $this->host . ':' . $this->port
+        );
     }
 
     //###################################################################################################################
-    // FILAMENT
+    // SCOPES
     //###################################################################################################################
 
-    public function getFilamentName(): string
+    public function scopeMatchUrl(Builder $query, string $search): Builder
     {
-        return $this->name;
-    }
-
-    public function getCurrentTenantLabel(): string
-    {
-        return 'Current Realm';
+        return $query
+            ->where('host', 'like', "%$search%")
+            ->orWhere('port', 'like', "%$search%");
     }
 
     //###################################################################################################################

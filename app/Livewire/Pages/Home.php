@@ -2,15 +2,11 @@
 
 namespace App\Livewire\Pages;
 
-use Illuminate\Contracts\View\View;
-use Livewire\Attributes\Layout;
-use Livewire\Component;
+use App\Core\Livewire\Page;
 
-class Home extends Component
+class Home extends Page
 {
-    #[Layout('layouts.base')]
-    public function render(): View
-    {
-        return view('pages.home');
-    }
+    protected static string $layout = 'components.layouts.base';
+
+    protected static string $view = 'pages.home';
 }

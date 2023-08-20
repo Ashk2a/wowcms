@@ -17,6 +17,10 @@ class User extends Authenticatable implements FilamentUser, HasName, HasTenants
     use HasFactory;
     use Notifiable;
 
+    //###################################################################################################################
+    // ATTRIBUTES
+    //###################################################################################################################
+
     /**
      * @var array<int, string>
      */
@@ -28,6 +32,10 @@ class User extends Authenticatable implements FilamentUser, HasName, HasTenants
     protected $casts = [
         'password' => 'hashed',
     ];
+
+    //###################################################################################################################
+    // FILAMENT
+    //###################################################################################################################
 
     public function canAccessPanel(Panel $panel): bool
     {

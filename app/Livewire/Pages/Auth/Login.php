@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Pages\Auth;
 
+use App\Core\Livewire\Page;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Filament\Actions\Action;
@@ -10,17 +11,17 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Http\Responses\Auth\Contracts\LoginResponse;
 use Filament\Notifications\Notification;
-use Filament\Pages\BasePage;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Validation\ValidationException;
+use Livewire\Features\SupportRedirects\Redirector;
 
 /**
  * @property Form $form
  */
-class Login extends BasePage
+class Login extends Page
 {
     use InteractsWithFormActions;
     use WithRateLimiting;
@@ -40,7 +41,7 @@ class Login extends BasePage
         $this->form->fill();
     }
 
-    public function authenticate(): ?LoginResponse
+    public function authenticate(): null|RedirectResponse|Redirector
     {
         try {
             $this->rateLimit(5);
@@ -70,7 +71,7 @@ class Login extends BasePage
 
         session()->regenerate();
 
-        return app(LoginResponse::class);
+        return redirect()->intended(route('home'));
     }
 
     public function form(Form $form): Form

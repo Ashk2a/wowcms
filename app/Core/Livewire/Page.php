@@ -1,6 +1,6 @@
 <?php
 
-namespace Filament\Pages;
+namespace App\Core\Livewire;
 
 use Closure;
 use Filament\Actions\Concerns\InteractsWithActions;
@@ -90,5 +90,25 @@ abstract class Page extends Component implements HasForms, HasActions, RendersAc
         }
 
         (static::$reportValidationErrorUsing)($exception);
+    }
+
+    public function getFormActionsAlignment(): string
+    {
+        return static::$formActionsAlignment;
+    }
+
+    public function areFormActionsSticky(): bool
+    {
+        return static::$formActionsAreSticky;
+    }
+
+    public function hasInlineLabels(): bool
+    {
+        return static::$hasInlineLabels;
+    }
+
+    public static function formActionsAlignment(string $alignment): void
+    {
+        static::$formActionsAlignment = $alignment;
     }
 }

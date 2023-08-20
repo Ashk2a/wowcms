@@ -11,8 +11,10 @@
 |
 */
 
+use App\Http\Controllers\Auth\LogoutController;
 use App\Livewire\Pages\Auth\Login;
 use App\Livewire\Pages\Home;
 
 Route::get('/', Home::class)->name('home');
-Route::get('/login', Login::class)->name('auth.login');
+Route::get('/login', Login::class)->name('login');
+Route::get('/logout', LogoutController::class)->name('logout');

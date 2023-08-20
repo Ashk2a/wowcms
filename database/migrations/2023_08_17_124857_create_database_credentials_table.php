@@ -11,13 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('realms', function (Blueprint $table) {
+        Schema::create('database_credentials', static function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
-            $table->string('name', 24)->unique();
-            $table->integer('priority')->default(0);
-            $table->boolean('is_visible')->default(true);
+            $table->string('host');
+            $table->integer('port');
+            $table->string('username');
+            $table->string('password')->default('');
             $table->timestamps();
+
+            $table->unique([
+                'host',
+                'port',
+            ]);
         });
     }
 
@@ -26,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('realms');
+        Schema::dropIfExists('databases');
     }
 };
