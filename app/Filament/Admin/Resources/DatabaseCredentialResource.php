@@ -25,6 +25,12 @@ class DatabaseCredentialResource extends Resource
     {
         return $form
             ->schema([
+                Forms\Components\TextInput::make('name')
+                    ->label(__('labels.name'))
+                    ->columnSpan(2)
+                    ->required()
+                    ->minLength(1)
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('host')
                     ->label(__('labels.host'))
                     ->required()

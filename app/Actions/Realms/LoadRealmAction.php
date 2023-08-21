@@ -14,7 +14,14 @@ class LoadRealmAction
     public function __invoke(Realm $realm): void
     {
         foreach ($realm->databases as $realmDatabase) {
-            ($this->loadDatabaseAction)($realmDatabase->getDatabaseConnection(), $realmDatabase->type->value);
+            ($this->loadDatabaseAction)(
+                $realmDatabase->type->value,
+                $realmDatabase->databaseCredential->host,
+                $realmDatabase->databaseCredential->port,
+                $realmDatabase->databaseCredential->username,
+                $realmDatabase->databaseCredential->password,
+                $realmDatabase->name
+            );
         }
     }
 }

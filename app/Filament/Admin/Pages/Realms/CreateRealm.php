@@ -2,24 +2,42 @@
 
 namespace App\Filament\Admin\Pages\Realms;
 
+use App\Enums\RealmDatabaseTypes;
 use App\Models\Realm;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\Tenancy\RegisterTenant;
 
 class CreateRealm extends RegisterTenant
 {
+    use RealmFormSchema;
+
     public static function getLabel(): string
     {
-        return 'Create new realm';
+        return __('titles.create_new_realm');
+    }
+
+    public function mount(): void
+    {
+        parent::mount();
+
+        $this->form->fill([
+            'databases' => collect(RealmDatabaseTypes::cases())
+                ->map(fn (RealmDatabaseTypes $realmDatabaseType) => [
+                    'name' => '',
+                    'database_credential_id' => null,
+                    'type' => $realmDatabaseType,
+                ]),
+        ]);
     }
 
     public function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                TextInput::make('name'),
-            ]);
+        return $form->schema($this->getFormSchema());
+    }
+
+    protected function mutateFormDataBeforeFill(array $data): array
+    {
+        return $data;
     }
 
     protected function handleRegistration(array $data): Realm

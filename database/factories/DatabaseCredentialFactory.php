@@ -18,6 +18,7 @@ class DatabaseCredentialFactory extends Factory
     public function definition(): array
     {
         return [
+            'name' => fake()->word() . fake()->numberBetween(1, 100),
             'host' => fake()->localIpv4(),
             'port' => fake()->numberBetween(3000, 4000),
             'username' => fake()->userName(),

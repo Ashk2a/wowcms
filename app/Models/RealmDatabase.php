@@ -34,20 +34,4 @@ class RealmDatabase extends Model
     {
         return $this->belongsTo(DatabaseCredential::class);
     }
-
-    //###################################################################################################################
-    // HELPERS
-    //###################################################################################################################
-
-    public function getDatabaseConnection(): array
-    {
-        return [
-            'realm_id' => $this->realm_id,
-            'host' => $this->databaseCredential->host,
-            'port' => $this->databaseCredential->port,
-            'username' => $this->databaseCredential->username,
-            'password' => $this->databaseCredential->password,
-            'database' => $this->name,
-        ];
-    }
 }

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('database_credentials', static function (Blueprint $table) {
             $table->id();
+            $table->string('name')
+                ->unique()
+                ->index();
             $table->string('host');
             $table->integer('port');
             $table->string('username');

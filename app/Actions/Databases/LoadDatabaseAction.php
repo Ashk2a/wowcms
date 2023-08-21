@@ -3,16 +3,44 @@
 namespace App\Actions\Databases;
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use JsonException;
 
 class LoadDatabaseAction
 {
-    public function __invoke(array $databaseConnection, string $connectionName): void
-    {
+    public function __invoke(
+        string $connectionName,
+        string $host,
+        int $port,
+        string $username,
+        string $password,
+        string $databaseName
+    ): void {
         $databaseConfigKey = 'database.connections.' . $connectionName;
         $currentDatabaseConnection = config($databaseConfigKey);
-        $newDatabaseConnection = array_merge($currentDatabaseConnection, $databaseConnection);
+        $newDatabaseConnection = array_merge(
+            $currentDatabaseConnection,
+            [
+                'host' => $host,
+                'port' => $port,
+                'username' => $username,
+                'password' => $password,
+                'database' => $databaseName,
+            ]
+        );
 
-        if (0 === strcmp(json_encode($currentDatabaseConnection), json_encode($newDatabaseConnection))) {
+        try {
+            $connectionCmp = strcmp(
+                json_encode($currentDatabaseConnection, JSON_THROW_ON_ERROR),
+                json_encode($newDatabaseConnection, JSON_THROW_ON_ERROR)
+            );
+
+            if (0 === $connectionCmp) {
+                return;
+            }
+        } catch (JsonException $e) {
+            Log::error('[LoadDatabaseAction] Failed to compare database connections');
+
             return;
         }
 

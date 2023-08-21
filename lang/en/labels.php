@@ -13,4 +13,7 @@ return [
     'port' => 'Port',
     'username' => 'Username',
     'password' => 'Password',
+    'database' => 'Database',
+    'credential' => 'Credential',
+    'type' => 'Type',
 ];
