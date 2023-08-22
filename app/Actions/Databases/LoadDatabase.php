@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use JsonException;
 
-class LoadDatabaseAction
+class LoadDatabase
 {
     public function __invoke(
         string $connectionName,

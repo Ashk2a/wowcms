@@ -2,19 +2,19 @@
 
 namespace App\Actions\Realms;
 
-use App\Actions\Databases\LoadDatabaseAction;
+use App\Actions\Databases\LoadDatabase;
 use App\Models\Realm;
 
-class LoadRealmAction
+class LoadRealm
 {
-    public function __construct(private readonly LoadDatabaseAction $loadDatabaseAction)
+    public function __construct(private readonly LoadDatabase $loadDatabase)
     {
     }
 
     public function __invoke(Realm $realm): void
     {
         foreach ($realm->databases as $realmDatabase) {
-            ($this->loadDatabaseAction)(
+            ($this->loadDatabase)(
                 $realmDatabase->type->value,
                 $realmDatabase->databaseCredential->host,
                 $realmDatabase->databaseCredential->port,

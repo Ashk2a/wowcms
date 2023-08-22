@@ -23,36 +23,40 @@ class DatabaseCredentialResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label(__('labels.name'))
-                    ->columnSpan(2)
-                    ->required()
-                    ->minLength(1)
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('host')
-                    ->label(__('labels.host'))
-                    ->required()
-                    ->minLength(1)
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('port')
-                    ->label(__('labels.port'))
-                    ->required()
-                    ->integer()
-                    ->minValue(1)
-                    ->maxValue(65535),
-                Forms\Components\TextInput::make('username')
-                    ->label(__('labels.username'))
-                    ->required()
-                    ->minLength(1)
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('password')
-                    ->label(__('labels.password'))
-                    ->nullable()
-                    ->password()
-                    ->maxLength(255),
-            ]);
+        return $form->schema(self::getFormSchema());
+    }
+
+    public static function getFormSchema(): array
+    {
+        return [
+            Forms\Components\TextInput::make('name')
+                ->label(__('labels.name'))
+                ->columnSpan(2)
+                ->required()
+                ->minLength(1)
+                ->maxLength(255),
+            Forms\Components\TextInput::make('host')
+                ->label(__('labels.host'))
+                ->required()
+                ->minLength(1)
+                ->maxLength(255),
+            Forms\Components\TextInput::make('port')
+                ->label(__('labels.port'))
+                ->required()
+                ->integer()
+                ->minValue(1)
+                ->maxValue(65535),
+            Forms\Components\TextInput::make('username')
+                ->label(__('labels.username'))
+                ->required()
+                ->minLength(1)
+                ->maxLength(255),
+            Forms\Components\TextInput::make('password')
+                ->label(__('labels.password'))
+                ->nullable()
+                ->password()
+                ->maxLength(255),
+        ];
     }
 
     public static function table(Table $table): Table

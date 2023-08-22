@@ -1,3 +1,3 @@
-<div>
+<x-pages>
     {{ $slot }}
-</div>
+</x-pages>

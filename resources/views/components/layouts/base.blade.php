@@ -23,8 +23,8 @@
 </head>
 
 <body class="antialiased">
-{{ $slot }}
 
+{{ $slot }}
 
 @livewire('notifications')
 @filamentScripts

@@ -16,4 +16,6 @@ return [
     'database' => 'Database',
     'credential' => 'Credential',
     'type' => 'Type',
+    'is_visible' => 'Is visible ?',
+    'priority' => 'Priority',
 ];

@@ -25,7 +25,7 @@ class CreateRealm extends RegisterTenant
                 ->map(fn (RealmDatabaseTypes $realmDatabaseType) => [
                     'name' => '',
                     'database_credential_id' => null,
-                    'type' => $realmDatabaseType,
+                    'type' => $realmDatabaseType->value,
                 ]),
         ]);
     }
