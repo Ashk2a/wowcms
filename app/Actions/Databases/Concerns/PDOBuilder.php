@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Actions\Databases;
+namespace App\Actions\Databases\Concerns;
 
 use PDO;
 use Throwable;
 
-class GetPDOInstance
+trait PDOBuilder
 {
-    public function __invoke(
+    protected function buildPDO(
         string $host,
         int $port,
         string $username,

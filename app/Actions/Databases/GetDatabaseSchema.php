@@ -2,24 +2,23 @@
 
 namespace App\Actions\Databases;
 
+use App\Actions\Databases\Concerns\PDOBuilder;
 use Illuminate\Support\Arr;
 use PDO;
 
 class GetDatabaseSchema
 {
-    private const INTERNAL_DATABASES = ['information_schema', 'performance_schema', 'mysql', 'sys'];
+    use PDOBuilder;
 
-    public function __construct(private readonly GetPDOInstance $getPDOInstance)
-    {
-    }
+    private const INTERNAL_DATABASES = ['information_schema', 'performance_schema', 'mysql', 'sys'];
 
     public function __invoke(
         string $host,
         int $port,
         string $username,
         string $password
-    ): ?array {
-        $pdo = ($this->getPDOInstance)(
+    ): array {
+        $pdo = $this->buildPDO(
             $host,
             $port,
             $username,
@@ -27,7 +26,7 @@ class GetDatabaseSchema
         );
 
         if (null === $pdo) {
-            return null;
+            return [];
         }
 
         return Arr::except(

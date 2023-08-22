@@ -126,6 +126,14 @@ services:
             - '${PUSHER_METRICS_FORWARDED_PORT:-9601}:9601'
         networks:
             - default
+            - proxy
+        labels:
+            - traefik.enable=true
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_soketi.entrypoints=https
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_soketi.rule=Host(`${WS_DOMAIN:-ws.cms.test}`)
+            - traefik.http.services.${COMPOSE_PROJECT_NAME}_soketi.loadbalancer.server.port=6001
+            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_soketi.tls=true
+            - traefik.docker.network=proxy
 
 networks:
     default:

@@ -11,11 +11,11 @@ class EditRealm extends EditTenantProfile
 
     public static function getLabel(): string
     {
-        return 'Edit realm';
+        return __('titles.edit_realm');
     }
 
     public function form(Form $form): Form
     {
-        return $form->schema($this->getFormSchema());
+        return $form->schema($this->getFormContent(false));
     }
 }

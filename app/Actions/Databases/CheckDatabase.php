@@ -2,11 +2,11 @@
 
 namespace App\Actions\Databases;
 
+use App\Actions\Databases\Concerns\PDOBuilder;
+
 class CheckDatabase
 {
-    public function __construct(private readonly GetPDOInstance $getPDOInstance)
-    {
-    }
+    use PDOBuilder;
 
     public function __invoke(
         string $host,
@@ -15,7 +15,7 @@ class CheckDatabase
         string $password,
         string $databaseName = null
     ): bool {
-        return (bool) ($this->getPDOInstance)(
+        return (bool) $this->buildPDO(
             $host,
             $port,
             $username,

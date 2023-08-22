@@ -16,10 +16,11 @@ return [
     'broadcasting' => [
         'echo' => [
             'broadcaster' => 'pusher',
-            'key' => env('VITE_PUSHER_APP_KEY'),
-            'host' => env('VITE_PUSHER_HOST'),
-            'port' => env('VITE_PUSHER_PORT'),
-            'forceTLS' => env('PUSHER_SCHEME') === 'https',
+            'key' => env('VITE_PUSHER_APP_KEY', 'app-key'),
+            'wsHost' => env('VITE_PUSHER_HOST', '127.0.0.1'),
+            'wsPort' => env('VITE_PUSHER_PORT', 80),
+            'wssPort' => env('VITE_PUSHER_SECURE_PORT', 443),
+            'forceTLS' => 'https' === env('PUSHER_SCHEME'),
         ],
     ],
 

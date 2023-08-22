@@ -58,11 +58,6 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
-    'domains' => [
-        'main' => env('MAIN_DOMAIN', 'cms.test'),
-        'admin' => env('ADMIN_DOMAIN', 'admin.cms.test'),
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -169,7 +164,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
+        App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,

@@ -32,7 +32,7 @@ class CreateRealm extends RegisterTenant
 
     public function form(Form $form): Form
     {
-        return $form->schema($this->getFormSchema());
+        return $form->schema($this->getFormContent(true));
     }
 
     protected function mutateFormDataBeforeFill(array $data): array
