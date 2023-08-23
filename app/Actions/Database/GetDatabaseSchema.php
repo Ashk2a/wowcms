@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\Databases;
+namespace App\Actions\Database;
 
-use App\Actions\Databases\Concerns\PDOBuilder;
+use App\Actions\Database\Concerns\PDOBuilder;
 use Illuminate\Support\Arr;
 use PDO;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\DatabaseCredentials;
+namespace App\Actions\DatabaseCredential;
 
-use App\Actions\Databases\CheckDatabase;
+use App\Actions\Database\CheckDatabase;
 use App\Models\DatabaseCredential;
 
 class CheckDatabaseCredential

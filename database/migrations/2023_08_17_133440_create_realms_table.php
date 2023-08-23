@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('realms', function (Blueprint $table) {
             $table->id();
             $table->string('slug')->unique();
-            $table->string('name', 24)->unique();
+            $table->string('name')->unique();
             $table->integer('priority')->default(0);
             $table->boolean('is_visible')->default(true);
             $table->timestamps();

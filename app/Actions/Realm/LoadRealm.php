@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\Realms;
+namespace App\Actions\Realm;
 
-use App\Actions\Databases\LoadDatabase;
+use App\Actions\Database\LoadDatabase;
 use App\Models\Realm;
 
 class LoadRealm

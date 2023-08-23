@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Actions\DatabaseCredentials;
+namespace App\Actions\DatabaseCredential;
 
-use App\Actions\Databases\GetDatabaseSchema;
+use App\Actions\Database\GetDatabaseSchema;
 use App\Models\DatabaseCredential;
 
 class GetDatabaseCredentialSchema

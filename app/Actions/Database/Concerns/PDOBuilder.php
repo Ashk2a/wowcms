@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Databases\Concerns;
+namespace App\Actions\Database\Concerns;
 
 use PDO;
 use Throwable;

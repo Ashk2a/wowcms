@@ -2,7 +2,7 @@
 
 namespace App\Filament\Admin\Pages\Realms;
 
-use App\Actions\DatabaseCredentials\CheckDatabaseCredential;
+use App\Actions\DatabaseCredential\CheckDatabaseCredential;
 use App\Filament\Admin\Resources\DatabaseCredentialResource;
 use App\Models\DatabaseCredential;
 use Filament\Forms\Components\Actions\Action;

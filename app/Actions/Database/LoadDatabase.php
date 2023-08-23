@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions\Databases;
+namespace App\Actions\Database;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
