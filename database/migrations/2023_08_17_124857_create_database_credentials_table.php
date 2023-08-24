@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('host');
             $table->integer('port');
             $table->string('username');
-            $table->string('password')->default('');
+            $table->text('password')->default('');
             $table->timestamps();
 
             $table->unique([

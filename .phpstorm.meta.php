@@ -11,6 +11,7 @@ namespace PHPSTORM_META {
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -26,8 +27,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -251,6 +250,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -266,8 +266,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -491,6 +489,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -506,8 +505,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -731,6 +728,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -746,8 +744,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -971,6 +967,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -986,8 +983,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -1211,6 +1206,7 @@ namespace PHPSTORM_META {
         ]));
     override(\App::get(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -1226,8 +1222,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -1451,6 +1445,7 @@ namespace PHPSTORM_META {
         ]));
     override(\App::make(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -1466,8 +1461,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -1691,6 +1684,7 @@ namespace PHPSTORM_META {
         ]));
     override(\App::makeWith(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -1706,8 +1700,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -1931,6 +1923,7 @@ namespace PHPSTORM_META {
         ]));
     override(\app(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -1946,8 +1939,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -2171,6 +2162,7 @@ namespace PHPSTORM_META {
         ]));
     override(\resolve(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -2186,8 +2178,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,
@@ -2411,6 +2401,7 @@ namespace PHPSTORM_META {
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
         '' => '@',
+            'App\Services\RealmManager' => \App\Services\RealmManager::class,
             'Barryvdh\Debugbar\LaravelDebugbar' => \Barryvdh\Debugbar\LaravelDebugbar::class,
             'BladeUI\Icons\Factory' => \BladeUI\Icons\Factory::class,
             'BladeUI\Icons\IconsManifest' => \BladeUI\Icons\IconsManifest::class,
@@ -2426,8 +2417,6 @@ namespace PHPSTORM_META {
             'Illuminate\Auth\Console\ClearResetsCommand' => \Illuminate\Auth\Console\ClearResetsCommand::class,
             'Illuminate\Auth\Middleware\RequirePassword' => \Illuminate\Auth\Middleware\RequirePassword::class,
             'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
-            'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
-            'Illuminate\Bus\DatabaseBatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
             'Illuminate\Cache\Console\CacheTableCommand' => \Illuminate\Cache\Console\CacheTableCommand::class,
             'Illuminate\Cache\Console\ClearCommand' => \Illuminate\Cache\Console\ClearCommand::class,

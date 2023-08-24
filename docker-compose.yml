@@ -114,6 +114,7 @@ services:
 
     soketi:
         container_name: ${COMPOSE_PROJECT_NAME}_soketi
+        restart: unless-stopped
         image: 'quay.io/soketi/soketi:latest-16-alpine'
         environment:
             SOKETI_DEBUG: '${SOKETI_DEBUG:-1}'

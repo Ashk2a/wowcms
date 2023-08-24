@@ -10,7 +10,11 @@ export default defineConfig({
     },
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+                'resources/js/shared.js',
+            ],
             refresh: [
                 ...refreshPaths,
                 'app/Filament/**',
@@ -18,6 +22,7 @@ export default defineConfig({
                 'app/Livewire/**',
                 'app/Providers/Filament/**',
                 'app/Tables/Columns/**',
+                'lang/**',
             ],
         }),
     ],

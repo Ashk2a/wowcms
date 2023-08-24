@@ -17,14 +17,26 @@ class DatabaseCredentialResource extends Resource
 {
     use SharedTenantResource;
 
+    //###################################################################################################################
+    // ATTRIBUTES
+    //###################################################################################################################
+
     protected static ?string $model = DatabaseCredential::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    //###################################################################################################################
+    // FORM
+    //###################################################################################################################
 
     public static function form(Form $form): Form
     {
         return $form->schema(self::getFormSchema());
     }
+
+    //###################################################################################################################
+    // TABLE
+    //###################################################################################################################
 
     public static function getFormSchema(): array
     {
@@ -59,6 +71,10 @@ class DatabaseCredentialResource extends Resource
         ];
     }
 
+    //###################################################################################################################
+    // TABLE
+    //###################################################################################################################
+
     public static function table(Table $table): Table
     {
         return $table
@@ -75,12 +91,12 @@ class DatabaseCredentialResource extends Resource
                     ->searchable(true, fn (Builder $query, string $search) => $query->matchUrl($search)),
                 DateColumn::make('created_at')
                     ->label(__('labels.created_at'))
-                    ->formatDate()
+                    ->formatDateState()
                     ->showTooltip()
                     ->sortable(),
                 DateColumn::make('updated_at')
                     ->label(__('labels.updated_at'))
-                    ->formatDate()
+                    ->formatDateState()
                     ->showTooltip()
                     ->sortable(),
             ])
@@ -100,12 +116,20 @@ class DatabaseCredentialResource extends Resource
             ]);
     }
 
+    //###################################################################################################################
+    // RELATIONS
+    //###################################################################################################################
+
     public static function getRelations(): array
     {
         return [
             //
         ];
     }
+
+    //###################################################################################################################
+    // PAGES
+    //###################################################################################################################
 
     public static function getPages(): array
     {
@@ -114,5 +138,14 @@ class DatabaseCredentialResource extends Resource
             'create' => Pages\CreateDatabaseCredential::route('/create'),
             'edit' => Pages\EditDatabaseCredential::route('/{record}/edit'),
         ];
+    }
+
+    //###################################################################################################################
+    // NAVIGATION
+    //###################################################################################################################
+
+    public static function getNavigationGroup(): ?string
+    {
+        return str(__('labels.setting'))->plural();
     }
 }

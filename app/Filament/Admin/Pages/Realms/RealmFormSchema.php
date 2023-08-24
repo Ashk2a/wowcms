@@ -34,7 +34,7 @@ trait RealmFormSchema
     {
         return [
             Checkbox::make('is_visible')
-                ->label(__('labels.is_visible'))
+                ->label(__('labels.visible'))
                 ->default(true),
             Grid::make()
                 ->columns([

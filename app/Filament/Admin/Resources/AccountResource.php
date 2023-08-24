@@ -4,16 +4,19 @@ namespace App\Filament\Admin\Resources;
 
 use App\Core\Filament\Resources\HasSideTemplateForm;
 use App\Core\Filament\Resources\SharedTenantResource;
-use App\Filament\Admin\Resources\UserResource\Pages;
-use App\Models\User;
+use App\Filament\Admin\Resources\AccountResource\Pages;
+use App\Forms\Components\DatePlaceholder;
+use App\Models\Game\Auth\Account;
 use App\Tables\Columns\DateColumn;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 
-class UserResource extends Resource
+class AccountResource extends Resource
 {
     use SharedTenantResource;
     use HasSideTemplateForm;
@@ -22,11 +25,11 @@ class UserResource extends Resource
     // ATTRIBUTES
     //###################################################################################################################
 
-    protected static ?string $model = User::class;
+    protected static ?string $model = Account::class;
 
-    protected static ?string $recordTitleAttribute = 'email';
+    protected static ?string $recordTitleAttribute = 'username';
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     //###################################################################################################################
     // FORM
@@ -37,16 +40,9 @@ class UserResource extends Resource
         return [
             Forms\Components\Section::make()
                 ->schema([
-                    Forms\Components\TextInput::make('nickname')
-                        ->label(__('labels.nickname'))
-                        ->required(),
-                    Forms\Components\TextInput::make('email')
-                        ->label(__('labels.email'))
-                        ->required()
-                        ->email()
-                        ->unique(ignoreRecord: true),
-                ])
-                ->columns(['xl' => 2]),
+                    Forms\Components\TextInput::make('username')
+                        ->label(__('labels.username')),
+                ]),
         ];
     }
 
@@ -55,14 +51,21 @@ class UserResource extends Resource
         return [
             Forms\Components\Section::make()
                 ->schema([
-                    Forms\Components\Placeholder::make('created_at')
+                    DatePlaceholder::make('joindate')
                         ->label(__('labels.created_at'))
-                        ->content(fn (User $record): ?string => $record->created_at->diffForHumans()),
-                    Forms\Components\Placeholder::make('updated_at')
-                        ->label(__('labels.updated_at'))
-                        ->content(fn (User $record): ?string => $record->updated_at->diffForHumans()),
-                ])
-                ->hidden(fn (?User $record) => null === $record),
+                        ->showDate(),
+                    DatePlaceholder::make('last_login')
+                        ->label(__('labels.last_login'))
+                        ->showDate(),
+                ]),
+            Forms\Components\Section::make()
+                ->schema([
+                    Forms\Components\Toggle::make('online')
+                        ->label(__('labels.online'))
+                        ->disabled(),
+                    Forms\Components\Toggle::make('locked')
+                        ->label(__('labels.locked')),
+                ]),
         ];
     }
 
@@ -76,24 +79,27 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('id')
                     ->label(__('labels.id'))
-                    ->sortable()
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('nickname')
-                    ->label(__('labels.nickname'))
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->label(__('labels.email'))
-                    ->searchable(),
-                DateColumn::make('created_at')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('userAccount.user.email')
+                    ->label(__('labels.user'))
+                    ->icon('heroicon-o-user')
+                    ->url(fn (Account $account) => UserResource::getUrl(
+                        'edit',
+                        ['record' => $account->userAccount->user]
+                    ), true)
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('username')
+                    ->label(__('labels.username')),
+                DateColumn::make('last_login')
+                    ->label(__('labels.last_login'))
+                    ->formatDateState()
+                    ->showTooltip(),
+                DateColumn::make('joindate')
                     ->label(__('labels.created_at'))
                     ->formatDateState()
-                    ->showTooltip()
-                    ->sortable(),
-                DateColumn::make('updated_at')
-                    ->label(__('labels.updated_at'))
-                    ->formatDateState()
-                    ->showTooltip()
-                    ->sortable(),
+                    ->showTooltip(),
             ])
             ->filters([
                 //
@@ -129,8 +135,9 @@ class UserResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListUsers::route('/'),
-            'edit' => Pages\EditUser::route('/{record}/edit'),
+            'index' => Pages\ListAccounts::route('/'),
+            'create' => Pages\CreateAccount::route('/create'),
+            'edit' => Pages\EditAccount::route('/{record}/edit'),
         ];
     }
 
@@ -143,12 +150,32 @@ class UserResource extends Resource
         return false;
     }
 
+    public static function canDelete(Model $record): bool
+    {
+        return false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return false;
+    }
+
     //###################################################################################################################
     // NAVIGATION
     //###################################################################################################################
 
     public static function getNavigationGroup(): ?string
     {
-        return __('labels.app');
+        return __('labels.realm');
+    }
+
+    //###################################################################################################################
+    // QUERY
+    //###################################################################################################################
+
+    public static function getEloquentQuery(): Builder
+    {
+        return Account::query()
+            ->with('userAccount.user');
     }
 }
