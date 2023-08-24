@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_realm_account', static function (Blueprint $table) {
+        Schema::create('user_account', static function (Blueprint $table) {
             $table->foreignId('user_id')
-                ->constrained()
-                ->cascadeOnDelete();
-            $table->foreignId('realm_id')
                 ->constrained()
                 ->cascadeOnDelete();
             $table->unsignedBigInteger('account_id')->unique();
             $table->timestamps();
-
-            $table->unique(['realm_id', 'account_id']);
         });
     }
 

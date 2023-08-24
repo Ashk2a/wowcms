@@ -83,13 +83,13 @@ services:
         volumes:
             - mariadb:/var/lib/mysql
         ports:
-            - ${DB_FORWARDED_PORT:-3308}:3306
+            - ${DB_APP_FORWARDED_PORT:-3308}:3306
         environment:
-            MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root}
+            MYSQL_ROOT_PASSWORD: ${DB_APP_ROOT_PASSWORD:-root}
             MYSQL_ROOT_HOST: '%'
-            MYSQL_DATABASE: ${DB_DATABASE}
-            MYSQL_USER: ${DB_USERNAME}
-            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: ${DB_APP_DATABASE}
+            MYSQL_USER: ${DB_APP_USERNAME}
+            MYSQL_PASSWORD: ${DB_APP_PASSWORD}
         networks:
             - default
         healthcheck:

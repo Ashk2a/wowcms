@@ -36,11 +36,6 @@ class Realm extends Model implements HasName, HasCurrentTenantLabel
         return $this->hasMany(RealmDatabase::class);
     }
 
-    public function authDatabase(): HasOne
-    {
-        return $this->getDatabaseOfType(RealmDatabaseTypes::AUTH);
-    }
-
     public function characterDatabase(): HasOne
     {
         return $this->getDatabaseOfType(RealmDatabaseTypes::CHARACTERS);

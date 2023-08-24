@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'app'),
 
     /*
     |--------------------------------------------------------------------------
@@ -42,15 +42,15 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-        'mysql' => [
+        'app' => [
             'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
+            'url' => env('DATABASE_APP_URL'),
+            'host' => env('DB_APP_HOST', '127.0.0.1'),
+            'port' => env('DB_APP_PORT', '3306'),
+            'database' => env('DB_APP_DATABASE', 'forge'),
+            'username' => env('DB_APP_USERNAME', 'forge'),
+            'password' => env('DB_APP_PASSWORD', ''),
+            'unix_socket' => env('DB_APP_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -60,8 +60,15 @@ return [
             'options' => [],
         ],
 
-        RealmDatabaseTypes::AUTH->value => [
+        'auth' => [
             'driver' => 'mysql',
+            'url' => env('DATABASE_AUTH_URL'),
+            'host' => env('DB_AUTH_HOST', '127.0.0.1'),
+            'port' => env('DB_AUTH_PORT', '3306'),
+            'database' => env('DB_AUTH_DATABASE', 'forge'),
+            'username' => env('DB_AUTH_USERNAME', 'forge'),
+            'password' => env('DB_AUTH_PASSWORD', ''),
+            'unix_socket' => env('DB_AUTH_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
@@ -91,34 +98,6 @@ return [
             'strict' => true,
             'engine' => null,
             'options' => [],
-        ],
-
-        'pgsql' => [
-            'driver' => 'pgsql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '5432'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'search_path' => 'public',
-            'sslmode' => 'prefer',
-        ],
-
-        'sqlsrv' => [
-            'driver' => 'sqlsrv',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', 'localhost'),
-            'port' => env('DB_PORT', '1433'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'charset' => 'utf8',
-            'prefix' => '',
-            'prefix_indexes' => true,
         ],
     ],
 

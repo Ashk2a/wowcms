@@ -6,7 +6,6 @@ use Filament\Support\Contracts\HasLabel;
 
 enum RealmDatabaseTypes: string implements HasLabel
 {
-    case AUTH = 'auth';
     case CHARACTERS = 'characters';
     case WORLD = 'world';
 
