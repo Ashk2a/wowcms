@@ -4,12 +4,13 @@ namespace App\Filament\Admin\Pages\Realms;
 
 use App\Enums\RealmDatabaseTypes;
 use App\Models\Realm;
-use Filament\Forms\Form;
 use Filament\Pages\Tenancy\RegisterTenant;
 
 class CreateRealm extends RegisterTenant
 {
     use RealmFormSchema;
+
+    protected static bool $isCreatePage = true;
 
     public static function getLabel(): string
     {
@@ -28,16 +29,6 @@ class CreateRealm extends RegisterTenant
                     'type' => $realmDatabaseType->value,
                 ]),
         ]);
-    }
-
-    public function form(Form $form): Form
-    {
-        return $form->schema($this->getFormContent(true));
-    }
-
-    protected function mutateFormDataBeforeFill(array $data): array
-    {
-        return $data;
     }
 
     protected function handleRegistration(array $data): Realm

@@ -84,10 +84,13 @@ class AccountResource extends Resource
                 Tables\Columns\TextColumn::make('userAccount.user.email')
                     ->label(__('labels.user'))
                     ->icon('heroicon-o-user')
-                    ->url(fn (Account $account) => UserResource::getUrl(
-                        'edit',
-                        ['record' => $account->userAccount->user]
-                    ), true)
+                    ->url(
+                        fn (Account $account) => ($account->userAccount
+                            ? UserResource::getUrl('edit', ['record' => $account->userAccount->user])
+                            : null
+                        ),
+                        true
+                    )
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('username')
@@ -166,7 +169,7 @@ class AccountResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('labels.realm');
+        return __('labels.auth');
     }
 
     //###################################################################################################################

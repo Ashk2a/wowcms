@@ -1,40 +1,38 @@
 <?php
 
-namespace App\Models;
+declare(strict_types=1);
 
-use App\Enums\RealmDatabaseTypes;
+namespace App\Models\Game\Auth;
+
+use App\Models\Realm;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class RealmDatabase extends Model
+class Realmlist extends Model
 {
     //###################################################################################################################
     // ATTRIBUTES
     //###################################################################################################################
+
+    public $connection = 'auth';
+
+    public $table = 'realmlist';
 
     /**
      * @var array<int, string>
      */
     protected $guarded = ['id'];
 
-    /**
-     * @var array<int, string>
-     */
-    public $casts = [
-        'type' => RealmDatabaseTypes::class,
-    ];
-
     //###################################################################################################################
     // RELATIONS
     //###################################################################################################################
 
-    public function realm(): BelongsTo
+    public function realm(): HasOne
     {
-        return $this->belongsTo(Realm::class);
-    }
+        $relation = $this->setConnection('app')->hasOne(Realm::class);
 
-    public function databaseCredential(): BelongsTo
-    {
-        return $this->belongsTo(DatabaseCredential::class);
+        $this->setConnection('auth');
+
+        return $relation;
     }
 }

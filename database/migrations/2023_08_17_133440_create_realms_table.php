@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('realms', function (Blueprint $table) {
+        Schema::create('realms', static function (Blueprint $table) {
             $table->id();
-            $table->string('slug')->unique();
+            $table->unsignedBigInteger('realmlist_id')->unique();
             $table->string('name')->unique();
+            $table->string('slug')->unique();
             $table->integer('priority')->default(0);
             $table->boolean('is_visible')->default(true);
             $table->timestamps();

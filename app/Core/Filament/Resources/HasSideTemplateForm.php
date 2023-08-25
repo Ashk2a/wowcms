@@ -10,13 +10,15 @@ trait HasSideTemplateForm
 {
     public static function form(Form $form): Form
     {
+        $sideForm = self::sideForm();
+
         return $form
             ->schema([
                 Forms\Components\Group::make()
                     ->schema(self::mainForm())
-                    ->columnSpan(['lg' => fn (?Model $record) => null === $record ? 3 : 2]),
+                    ->columnSpan(['lg' => fn (?Model $record) => null === $record && [] === $sideForm ? 3 : 2]),
                 Forms\Components\Group::make()
-                    ->schema(self::sideForm())
+                    ->schema($sideForm)
                     ->columnSpan(1),
             ])
             ->columns(3);

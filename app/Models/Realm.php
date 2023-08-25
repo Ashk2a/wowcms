@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use App\Enums\RealmDatabaseTypes;
+use App\Models\Game\Auth\Realmlist;
 use Filament\Models\Contracts\HasCurrentTenantLabel;
 use Filament\Models\Contracts\HasName;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Sluggable\HasSlug;
@@ -30,6 +32,15 @@ class Realm extends Model implements HasName, HasCurrentTenantLabel
     //###################################################################################################################
     // RELATIONS
     //###################################################################################################################
+
+    public function realmlist(): BelongsTo
+    {
+        $relation = $this->setConnection('auth')->belongsTo(Realmlist::class);
+
+        $this->setConnection('app');
+
+        return $relation;
+    }
 
     public function databases(): HasMany
     {

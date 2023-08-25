@@ -20,6 +20,8 @@ class Account extends Model
 
     public $table = 'account';
 
+    public $timestamps = false;
+
     /**
      * @var array<int, string>
      */
@@ -47,7 +49,11 @@ class Account extends Model
 
     public function userAccount(): HasOne
     {
-        return $this->setConnection('app')->hasOne(UserAccount::class);
+        $relation = $this->setConnection('app')->hasOne(UserAccount::class);
+
+        $this->setConnection('auth');
+
+        return $relation;
     }
 
     public function user(): HasOneThrough

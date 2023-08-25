@@ -10,7 +10,11 @@ class UserAccount extends Pivot
 {
     public function account(): BelongsTo
     {
-        return $this->setConnection('auth')->belongsTo(Account::class);
+        $relation = $this->setConnection('auth')->belongsTo(Account::class);
+
+        $this->setConnection('app');
+
+        return $relation;
     }
 
     public function user(): BelongsTo

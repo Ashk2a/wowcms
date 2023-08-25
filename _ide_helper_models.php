@@ -19,7 +19,7 @@ namespace App\Models{
  * @property string $host
  * @property int $port
  * @property string $username
- * @property string $password
+ * @property mixed $password
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RealmDatabase> $databases
@@ -54,13 +54,13 @@ namespace App\Models\Game\Auth{
  * @property mixed|null $totp_secret
  * @property string $email
  * @property string $reg_mail
- * @property string $joindate
+ * @property \Illuminate\Support\Carbon $joindate
  * @property string $last_ip
  * @property string $last_attempt_ip
  * @property int $failed_logins
  * @property int $locked
  * @property string $lock_country
- * @property string|null $last_login
+ * @property \Illuminate\Support\Carbon|null $last_login
  * @property int $online
  * @property int $expansion
  * @property int $mutetime
@@ -70,6 +70,8 @@ namespace App\Models\Game\Auth{
  * @property string $os
  * @property int $recruiter
  * @property int $totaltime
+ * @property-read \App\Models\User|null $user
+ * @property-read \App\Models\UserAccount|null $userAccount
  * @method static \Illuminate\Database\Eloquent\Builder|Account newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Account newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Account query()
@@ -101,13 +103,50 @@ namespace App\Models\Game\Auth{
 	class Account extends \Eloquent {}
 }
 
+namespace App\Models\Game\Auth{
+/**
+ * App\Models\Game\Auth\Realmlist
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $address
+ * @property string $localAddress
+ * @property string $localSubnetMask
+ * @property int $port
+ * @property int $icon
+ * @property int $flag
+ * @property int $timezone
+ * @property int $allowedSecurityLevel
+ * @property float $population
+ * @property int $gamebuild
+ * @property-read \App\Models\Realm|null $realm
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereAllowedSecurityLevel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereFlag($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereGamebuild($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereLocalAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereLocalSubnetMask($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist wherePopulation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist wherePort($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realmlist whereTimezone($value)
+ */
+	class Realmlist extends \Eloquent {}
+}
+
 namespace App\Models{
 /**
  * App\Models\Realm
  *
  * @property int $id
- * @property string $slug
+ * @property int $realmlist_id
  * @property string $name
+ * @property string $slug
  * @property int $priority
  * @property int $is_visible
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -115,6 +154,7 @@ namespace App\Models{
  * @property-read \App\Models\RealmDatabase|null $characterDatabase
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RealmDatabase> $databases
  * @property-read int|null $databases_count
+ * @property-read \App\Models\Game\Auth\Realmlist|null $realmlist
  * @property-read \App\Models\RealmDatabase|null $worldDatabase
  * @method static \Database\Factories\RealmFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Realm newModelQuery()
@@ -125,6 +165,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Realm whereIsVisible($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Realm whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Realm wherePriority($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Realm whereRealmlistId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Realm whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Realm whereUpdatedAt($value)
  */
@@ -197,6 +238,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Game\Auth\Account|null $account
+ * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|UserAccount newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserAccount newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UserAccount query()

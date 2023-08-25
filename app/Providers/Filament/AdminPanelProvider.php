@@ -8,8 +8,8 @@ use App\Models\Realm;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\MenuItem;
 use Filament\Navigation\NavigationGroup;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -35,24 +35,25 @@ class AdminPanelProvider extends PanelProvider
             ->tenantRegistration(CreateRealm::class)
             ->tenantProfile(EditRealm::class)
             ->renderHook(
-                'panels::body.end',
-                fn (): string => Blade::render("@vite('resources/js/shared.js')")
+                'panels::head.end',
+                fn (): string => Blade::render("@vite('resources/css/app.css')")
             )
+            ->navigationItems([
+                NavigationItem::make()
+                    ->label(fn () => __('labels.leave_admin'))
+                    ->icon('heroicon-o-chevron-left')
+                    ->url('/'),
+            ])
             ->navigationGroups([
                 NavigationGroup::make()
                     ->label(fn () => __('labels.app')),
                 NavigationGroup::make()
-                    ->label(fn () => str(__('labels.realm'))),
+                    ->label(fn () => str(__('labels.auth'))),
                 NavigationGroup::make()
                     ->label(fn () => str(__('labels.setting'))->plural()),
             ])
             ->pages([
                 Pages\Dashboard::class,
-            ])
-            ->tenantMenuItems([
-                MenuItem::make()
-                    ->label('Website')
-                    ->url('/'),
             ])
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Game\Auth\Realmlist;
 use App\Models\Realm;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,8 @@ class RealmSeeder extends Seeder
      */
     public function run(): void
     {
-        Realm::factory(5)->create();
+        Realm::factory()->create([
+            'realmlist_id' => Realmlist::first(),
+        ]);
     }
 }
