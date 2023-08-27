@@ -78,13 +78,6 @@ class RealmlistResource extends Resource
         return [
             Forms\Components\Section::make()
                 ->schema([
-                    Forms\Components\Placeholder::make('population')
-                        ->label(__('labels.population'))
-                        ->content(fn (?Realmlist $record) => $record->population),
-                ])
-                ->hidden(fn (?Realmlist $record) => null === $record),
-            Forms\Components\Section::make()
-                ->schema([
                     Forms\Components\TextInput::make('allowedSecurityLevel')
                         ->label(__('labels.allowed_security_level'))
                         ->default('0')
@@ -140,8 +133,6 @@ class RealmlistResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->label(__('labels.address')),
-                Tables\Columns\TextColumn::make('population')
-                    ->label(__('labels.population')),
             ])
             ->filters([
                 //

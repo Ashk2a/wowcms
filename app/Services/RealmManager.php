@@ -15,21 +15,22 @@ class RealmManager
     {
     }
 
-    public function load(Realm $realm): void
+    public function setCurrent(Realm $realm): void
     {
-        $this->currentRealm = ($this->loadRealm)($realm);
+        $this->currentRealm = $realm;
+        ($this->loadRealm)($realm);
     }
 
     public function each(callable $callback): void
     {
         foreach (Realm::all() as $realm) {
-            $this->load($realm);
+            $this->setCurrent($realm);
 
             $callback($realm);
         }
     }
 
-    public function get(): ?Realm
+    public function getCurrent(): ?Realm
     {
         return $this->currentRealm;
     }

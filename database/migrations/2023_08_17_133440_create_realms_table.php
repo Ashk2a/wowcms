@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('realms', static function (Blueprint $table) {
             $table->id();
+            $table->foreignId('auth_database_id')
+                ->constrained()
+                ->cascadeOnDelete();
             $table->unsignedBigInteger('realmlist_id')->unique();
             $table->string('name')->unique();
             $table->string('slug')->unique();
