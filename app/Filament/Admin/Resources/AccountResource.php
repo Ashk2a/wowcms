@@ -7,6 +7,7 @@ use App\Core\Filament\Resources\SharedTenantResource;
 use App\Filament\Admin\Resources\AccountResource\Pages;
 use App\Forms\Components\DatePlaceholder;
 use App\Models\Game\Auth\Account;
+use App\Services\RealmManager;
 use App\Tables\Columns\DateColumn;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -148,6 +149,11 @@ class AccountResource extends Resource
     // PERMISSIONS
     //###################################################################################################################
 
+    public static function canViewAny(): bool
+    {
+        return null !== resolve(RealmManager::class)->getCurrent()?->auth_database_id;
+    }
+
     public static function canCreate(): bool
     {
         return false;
@@ -169,7 +175,7 @@ class AccountResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('labels.auth');
+        return __('labels.game');
     }
 
     //###################################################################################################################

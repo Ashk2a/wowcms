@@ -34,11 +34,14 @@ trait RealmFormSchema
                                     ->required()
                                     ->minLength(1)
                                     ->maxLength(255),
-                                Select::make('realmlist_id')
+                                Select::make('auth_database_id')
+                                    ->label(__('labels.auth_database'))
+                                    ->relationship('authDatabase', 'name'),
+                                /*Select::make('realmlist_id')
                                     ->label(__('labels.realmlist'))
                                     ->relationship('realmlist', 'name')
                                     ->required()
-                                    ->unique(ignoreRecord: true),
+                                    ->unique(ignoreRecord: true),*/
                             ])
                             ->columns(2),
                         $this->getDatabasesRepeater(),

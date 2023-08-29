@@ -48,7 +48,7 @@ class AdminPanelProvider extends PanelProvider
                 NavigationGroup::make()
                     ->label(fn () => __('labels.app')),
                 NavigationGroup::make()
-                    ->label(fn () => str(__('labels.auth'))),
+                    ->label(fn () => str(__('labels.game'))),
                 NavigationGroup::make()
                     ->label(fn () => str(__('labels.setting'))->plural()),
             ])

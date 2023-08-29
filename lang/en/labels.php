@@ -26,6 +26,7 @@ return [
     'locked' => 'Locked',
     'online' => 'Online',
     'auth' => 'Auth',
+    'game' => 'Game',
     'address' => 'Address',
     'population' => 'Population',
     'local_address' => 'Local address',

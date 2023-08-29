@@ -180,6 +180,6 @@ class RealmlistResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return __('labels.auth');
+        return __('labels.game');
     }
 }

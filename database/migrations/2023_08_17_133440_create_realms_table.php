@@ -16,12 +16,17 @@ return new class extends Migration
             $table->foreignId('auth_database_id')
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->unsignedBigInteger('realmlist_id')->unique();
+            $table->unsignedBigInteger('realmlist_id');
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->integer('priority')->default(0);
             $table->boolean('is_visible')->default(true);
             $table->timestamps();
+
+            $table->unique([
+                'auth_database_id',
+                'realmlist_id',
+            ]);
         });
     }
 

@@ -13,14 +13,25 @@ class LoadRealm
 
     public function __invoke(Realm $realm): void
     {
-        foreach ($realm->gameDatabases as $realmDatabase) {
+        $authDatabase = $realm->authDatabase;
+
+        ($this->loadDatabase)(
+            'auth',
+            $authDatabase->databaseCredential->host,
+            $authDatabase->databaseCredential->port,
+            $authDatabase->databaseCredential->username,
+            $authDatabase->databaseCredential->password,
+            $authDatabase->database
+        );
+
+        foreach ($realm->gameDatabases as $gameDatabase) {
             ($this->loadDatabase)(
-                $realmDatabase->type->value,
-                $realmDatabase->databaseCredential->host,
-                $realmDatabase->databaseCredential->port,
-                $realmDatabase->databaseCredential->username,
-                $realmDatabase->databaseCredential->password,
-                $realmDatabase->database
+                $gameDatabase->type->value,
+                $gameDatabase->databaseCredential->host,
+                $gameDatabase->databaseCredential->port,
+                $gameDatabase->databaseCredential->username,
+                $gameDatabase->databaseCredential->password,
+                $gameDatabase->database
             );
         }
     }
