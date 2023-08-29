@@ -2,16 +2,13 @@
 
 namespace App\Models;
 
-use App\Enums\RealmDatabaseTypes;
 use App\Models\Game\Auth\Realmlist;
 use Filament\Models\Contracts\HasCurrentTenantLabel;
 use Filament\Models\Contracts\HasName;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -42,26 +39,14 @@ class Realm extends Model implements HasName, HasCurrentTenantLabel
         return $relation;
     }
 
-    public function databases(): HasMany
+    public function authDatabase(): BelongsTo
     {
-        return $this->hasMany(RealmDatabase::class);
+        return $this->belongsTo(AuthDatabase::class);
     }
 
-    public function characterDatabase(): HasOne
+    public function gameDatabases(): HasMany
     {
-        return $this->getDatabaseOfType(RealmDatabaseTypes::CHARACTERS);
-    }
-
-    public function worldDatabase(): HasOne
-    {
-        return $this->getDatabaseOfType(RealmDatabaseTypes::WORLD);
-    }
-
-    private function getDatabaseOfType(RealmDatabaseTypes $type): HasOne
-    {
-        return $this->databases()
-            ->one()
-            ->ofMany([], fn (Builder $query) => $query->where('type', $type));
+        return $this->hasMany(GameDatabase::class);
     }
 
     //###################################################################################################################

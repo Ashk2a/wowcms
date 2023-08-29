@@ -35,7 +35,7 @@ class DatabaseCredential extends Model
 
     public function databases(): HasMany
     {
-        return $this->hasMany(RealmDatabase::class);
+        return $this->hasMany(GameDatabase::class);
     }
 
     //###################################################################################################################

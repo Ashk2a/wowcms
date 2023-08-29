@@ -2,7 +2,7 @@
 
 namespace App\Filament\Admin\Pages\Realms;
 
-use App\Enums\RealmDatabaseTypes;
+use App\Enums\RealmGameDatabaseTypes;
 use App\Models\Realm;
 use Filament\Pages\Tenancy\RegisterTenant;
 
@@ -22,9 +22,9 @@ class CreateRealm extends RegisterTenant
         parent::mount();
 
         $this->form->fill([
-            'databases' => collect(RealmDatabaseTypes::cases())
-                ->map(fn (RealmDatabaseTypes $realmDatabaseType) => [
-                    'name' => '',
+            'gameDatabases' => collect(RealmGameDatabaseTypes::cases())
+                ->map(fn (RealmGameDatabaseTypes $realmDatabaseType) => [
+                    'database' => '',
                     'database_credential_id' => null,
                     'type' => $realmDatabaseType->value,
                 ]),

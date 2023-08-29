@@ -22,7 +22,7 @@ namespace App\Models{
  * @property mixed $password
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RealmDatabase> $databases
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\GameDatabase> $databases
  * @property-read int|null $databases_count
  * @property-read string $url
  * @method static \Database\Factories\DatabaseCredentialFactory factory($count = null, $state = [])
@@ -151,11 +151,11 @@ namespace App\Models{
  * @property int $is_visible
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \App\Models\RealmDatabase|null $characterDatabase
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RealmDatabase> $databases
+ * @property-read \App\Models\GameDatabase|null $characterDatabase
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\GameDatabase> $databases
  * @property-read int|null $databases_count
  * @property-read \App\Models\Game\Auth\Realmlist|null $realmlist
- * @property-read \App\Models\RealmDatabase|null $worldDatabase
+ * @property-read \App\Models\GameDatabase|null $worldDatabase
  * @method static \Database\Factories\RealmFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Realm newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Realm newQuery()
@@ -179,22 +179,22 @@ namespace App\Models{
  * @property int $id
  * @property int $realm_id
  * @property int $database_credential_id
- * @property \App\Enums\RealmDatabaseTypes $type
+ * @property \App\Enums\RealmGameDatabaseTypes $type
  * @property string $name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\DatabaseCredential $databaseCredential
  * @property-read \App\Models\Realm $realm
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase query()
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase whereDatabaseCredentialId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase whereRealmId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase whereType($value)
- * @method static \Illuminate\Database\Eloquent\Builder|RealmDatabase whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase query()
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase whereDatabaseCredentialId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase whereRealmId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|GameDatabase whereUpdatedAt($value)
  */
 	class RealmDatabase extends \Eloquent {}
 }

@@ -27,7 +27,6 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        ray('ok');
         return $panel
             ->id('admin')
             ->path('admin')

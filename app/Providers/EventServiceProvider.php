@@ -17,6 +17,6 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         TenantSet::class => [
             SetCurrentRealm::class,
-        ]
+        ],
     ];
 }

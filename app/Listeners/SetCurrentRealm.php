@@ -24,7 +24,7 @@ class SetCurrentRealm
         $newRealm = $event->getTenant();
         $currentRealm = $this->realmManager->getCurrent();
 
-        if ($currentRealm !== null && $currentRealm->is($newRealm)) {
+        if (null !== $currentRealm && $currentRealm->is($newRealm)) {
             return;
         }
 

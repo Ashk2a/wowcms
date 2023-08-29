@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('realm_databases', static function (Blueprint $table) {
+        Schema::create('game_databases', static function (Blueprint $table) {
             $table->id();
             $table->foreignId('realm_id')
                 ->constrained()
@@ -20,12 +20,17 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
             $table->string('type');
-            $table->string('name');
+            $table->string('database');
             $table->timestamps();
 
             $table->unique([
                 'realm_id',
                 'type',
+            ]);
+
+            $table->unique([
+                'database_credential_id',
+                'database',
             ]);
         });
     }
@@ -35,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('realm_databases');
+        Schema::dropIfExists('game_databases');
     }
 };

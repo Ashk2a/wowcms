@@ -1,6 +1,6 @@
 <?php
 
-use App\Enums\RealmDatabaseTypes;
+use App\Enums\RealmGameDatabaseTypes;
 use Illuminate\Support\Str;
 
 return [
@@ -78,7 +78,7 @@ return [
             'options' => [],
         ],
 
-        RealmDatabaseTypes::CHARACTERS->value => [
+        RealmGameDatabaseTypes::CHARACTERS->value => [
             'driver' => 'mysql',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -89,7 +89,7 @@ return [
             'options' => [],
         ],
 
-        RealmDatabaseTypes::WORLD->value => [
+        RealmGameDatabaseTypes::WORLD->value => [
             'driver' => 'mysql',
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',

@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Enums\RealmDatabaseTypes;
-use App\Models\DatabaseCredential;
+use App\Enums\RealmGameDatabaseTypes;
+use App\Models\AuthDatabase;
+use App\Models\GameDatabase;
 use App\Models\Realm;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -24,21 +25,27 @@ class RealmFactory extends Factory
         return [
             'slug' => str($name)->slug(),
             'name' => $name,
+            'auth_database_id' => AuthDatabase::factory(),
         ];
     }
 
     public function configure(): self
     {
-        return $this->afterCreating(function (Realm $realm) {
-            $databaseCredentials = DatabaseCredential::factory()->create();
+        return $this
+            ->afterCreating(function (Realm $realm) {
+                $databaseCredential = $realm->authDatabase->databaseCredential;
 
-            foreach (RealmDatabaseTypes::cases() as $realmDatabaseType) {
-                $realm->databases()->create([
-                    'type' => $realmDatabaseType,
-                    'name' => fake()->word(),
-                    'database_credential_id' => $databaseCredentials->id,
-                ]);
-            }
-        });
+                $realm->gameDatabases()->createMany(
+                    collect(RealmGameDatabaseTypes::cases())
+                        ->map(fn (RealmGameDatabaseTypes $type) => (
+                            GameDatabase::factory()
+                                ->make([
+                                    'database_credential_id' => $databaseCredential,
+                                    'type' => $type,
+                                ])
+                                ->toArray()
+                        ))
+                );
+            });
     }
 }

@@ -2,14 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\AuthDatabase;
-use App\Models\DatabaseCredential;
+use App\Models\GameDatabase;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory<AuthDatabase>
+ * @extends Factory<GameDatabase>
  */
-class AuthDatabaseFactory extends Factory
+class GameDatabaseFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -19,8 +18,6 @@ class AuthDatabaseFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->word,
-            'database_credential_id' => DatabaseCredential::factory(),
             'database' => $this->faker->word,
         ];
     }

@@ -77,9 +77,9 @@ trait RealmFormSchema
 
     private function getDatabasesRepeater(): Repeater
     {
-        return Repeater::make('databases')
+        return Repeater::make('gameDatabases')
             ->hiddenLabel(true)
-            ->relationship('databases')
+            ->relationship('gameDatabases')
             ->itemLabel(fn (array $state) => __('labels.database') . ' ' . $state['type'])
             ->schema([
                 Grid::make()
@@ -97,14 +97,14 @@ trait RealmFormSchema
                                 Grid::make()->schema(DatabaseCredentialResource::getFormSchema()),
                             ])
                             ->required(),
-                        TextInput::make('name')
-                            ->label(__('labels.name'))
+                        TextInput::make('database')
+                            ->label(__('labels.database'))
                             ->suffixAction(function () {
-                                return Action::make('copyCostToPrice')
+                                return Action::make('checkDatabase')
                                     ->icon('heroicon-m-arrow-path')
                                     ->action(function (TextInput $component, ?string $state, callable $get) {
                                         $targetStatePath = str($component->getStatePath(false))
-                                            ->replace('name', 'database_credential_id')
+                                            ->replace('database', 'database_credential_id')
                                             ->value();
 
                                         $databaseCredential = DatabaseCredential::find($get($targetStatePath));

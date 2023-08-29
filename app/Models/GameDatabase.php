@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
-use App\Enums\RealmDatabaseTypes;
+use App\Enums\RealmGameDatabaseTypes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class RealmDatabase extends Model
+class GameDatabase extends Model
 {
+    use HasFactory;
+
     //###################################################################################################################
     // ATTRIBUTES
     //###################################################################################################################
@@ -21,7 +24,7 @@ class RealmDatabase extends Model
      * @var array<int, string>
      */
     public $casts = [
-        'type' => RealmDatabaseTypes::class,
+        'type' => RealmGameDatabaseTypes::class,
     ];
 
     //###################################################################################################################

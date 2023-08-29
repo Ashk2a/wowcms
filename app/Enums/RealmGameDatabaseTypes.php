@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 
-enum RealmDatabaseTypes: string implements HasLabel
+enum RealmGameDatabaseTypes: string implements HasLabel
 {
     case CHARACTERS = 'characters';
     case WORLD = 'world';

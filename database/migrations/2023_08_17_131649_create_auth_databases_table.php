@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('auth_databases', static function (Blueprint $table) {
             $table->id();
+            $table->foreignId('database_credential_id')
+                ->constrained()
+                ->cascadeOnDelete();
+            $table->string('name')->unique();
+            $table->string('database');
             $table->timestamps();
+
+            $table->unique([
+                'database_credential_id',
+                'database',
+            ]);
         });
     }
 
