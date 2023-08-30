@@ -13,4 +13,12 @@ enum RealmGameDatabaseTypes: string implements HasLabel
     {
         return $this->value;
     }
+
+    public static function gameDatabaseCases(): array
+    {
+        return [
+            self::CHARACTERS,
+            self::WORLD,
+        ];
+    }
 }
