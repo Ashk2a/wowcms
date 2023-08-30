@@ -2,17 +2,22 @@
 
 namespace App\Models;
 
+use App\Core\Models\Traits\InteractWithMultiDatabases;
 use App\Models\Game\Auth\Account;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class UserAccount extends Pivot
 {
+    use InteractWithMultiDatabases;
+
     public function account(): BelongsTo
     {
-        $relation = $this->setConnection('auth')->belongsTo(Account::class);
+        $relation = $this
+            ->setAuthConnection()
+            ->belongsTo(Account::class);
 
-        $this->setConnection('app');
+        $this->setAppConnection();
 
         return $relation;
     }

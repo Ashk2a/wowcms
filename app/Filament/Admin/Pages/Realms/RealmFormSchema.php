@@ -3,6 +3,8 @@
 namespace App\Filament\Admin\Pages\Realms;
 
 use App\Actions\DatabaseCredential\CheckDatabaseCredential;
+use App\Enums\RealmDatabaseTypes;
+use App\Filament\Admin\Resources\AuthDatabaseResource;
 use App\Filament\Admin\Resources\DatabaseCredentialResource;
 use App\Forms\Components\DatePlaceholder;
 use App\Models\DatabaseCredential;
@@ -36,7 +38,10 @@ trait RealmFormSchema
                                     ->maxLength(255),
                                 Select::make('auth_database_id')
                                     ->label(__('labels.auth_database'))
-                                    ->relationship('authDatabase', 'name'),
+                                    ->relationship('authDatabase', 'name')
+                                    ->createOptionForm([
+                                        Grid::make()->schema(AuthDatabaseResource::formSchema()),
+                                    ]),
                                 /*Select::make('realmlist_id')
                                     ->label(__('labels.realmlist'))
                                     ->relationship('realmlist', 'name')
@@ -83,7 +88,11 @@ trait RealmFormSchema
         return Repeater::make('gameDatabases')
             ->hiddenLabel(true)
             ->relationship('gameDatabases')
-            ->itemLabel(fn (array $state) => __('labels.database') . ' ' . $state['type'])
+            ->itemLabel(fn (array $state) => match ($state['type']) {
+                RealmDatabaseTypes::WORLD->value => __('labels.world_database'),
+                RealmDatabaseTypes::CHARACTERS->value => __('labels.characters_database'),
+                default => null,
+            })
             ->schema([
                 Grid::make()
                     ->schema([
@@ -92,12 +101,11 @@ trait RealmFormSchema
                             ->required()
                             ->hidden(),
                         Select::make('database_credential_id')
-                            ->label(__('labels.credential'))
-                            ->searchable()
+                            ->label(__('labels.database_credential'))
                             ->preload()
                             ->relationship('databaseCredential', 'name')
                             ->createOptionForm([
-                                Grid::make()->schema(DatabaseCredentialResource::getFormSchema()),
+                                Grid::make()->schema(DatabaseCredentialResource::formSchema()),
                             ])
                             ->required(),
                         TextInput::make('database')

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models\Game\Auth;
 
+use App\Core\Models\Traits\InteractWithMultiDatabases;
+use App\Enums\RealmDatabaseTypes;
 use App\Models\User;
 use App\Models\UserAccount;
 use Illuminate\Database\Eloquent\Model;
@@ -12,11 +14,13 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Account extends Model
 {
+    use InteractWithMultiDatabases;
+
     //###################################################################################################################
     // ATTRIBUTES
     //###################################################################################################################
 
-    public $connection = 'auth';
+    public $connection = RealmDatabaseTypes::AUTH->value;
 
     public $table = 'account';
 
@@ -33,6 +37,7 @@ class Account extends Model
     protected $hidden = [
         'salt',
         'verifier',
+        'session_key',
     ];
 
     /**
@@ -49,17 +54,19 @@ class Account extends Model
 
     public function userAccount(): HasOne
     {
-        $relation = $this->setConnection('app')->hasOne(UserAccount::class);
+        $relation = $this
+            ->setAppConnection()
+            ->hasOne(UserAccount::class);
 
-        $this->setConnection('auth');
+        $this->setAuthConnection();
 
         return $relation;
     }
 
     public function user(): HasOneThrough
     {
-        return $this
-            ->setConnection('app')
+        $relation = $this
+            ->setAppConnection()
             ->hasOneThrough(
                 User::class,
                 UserAccount::class,
@@ -68,5 +75,9 @@ class Account extends Model
                 'id',
                 'user_id'
             );
+
+        $this->setAuthConnection();
+
+        return $relation;
     }
 }

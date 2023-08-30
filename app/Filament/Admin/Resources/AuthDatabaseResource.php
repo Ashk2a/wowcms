@@ -2,10 +2,14 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Core\Filament\Resources\HasSideTemplateForm;
 use App\Core\Filament\Resources\SharedTenantResource;
 use App\Filament\Admin\Resources\AuthDatabaseResource\Pages;
 use App\Models\AuthDatabase;
-use Filament\Forms\Form;
+use Filament\Forms;
+use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -13,6 +17,7 @@ use Filament\Tables\Table;
 class AuthDatabaseResource extends Resource
 {
     use SharedTenantResource;
+    use HasSideTemplateForm;
 
     //###################################################################################################################
     // ATTRIBUTES
@@ -28,10 +33,34 @@ class AuthDatabaseResource extends Resource
     // FORM
     //###################################################################################################################
 
-    public static function form(Form $form): Form
+    public static function mainFormSchema(): array
     {
-        return $form
-            ->schema([]);
+        return [
+            Forms\Components\Section::make()
+                ->schema([
+                    Forms\Components\TextInput::make('name')
+                        ->label(__('labels.name'))
+                        ->required()
+                        ->maxLength(255),
+                ]),
+            Forms\Components\Section::make()
+                ->schema([
+                    Select::make('database_credential_id')
+                        ->label(__('labels.database_credential'))
+                        ->preload()
+                        ->relationship('databaseCredential', 'name')
+                        ->createOptionForm([
+                            Grid::make()->schema(DatabaseCredentialResource::formSchema()),
+                        ])
+                        ->required(),
+                    TextInput::make('database')
+                        ->label(__('labels.database'))
+                        ->minLength(1)
+                        ->maxLength(255)
+                        ->required(),
+                ])
+                ->columns(['xl' => 2]),
+        ];
     }
 
     //###################################################################################################################

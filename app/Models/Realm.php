@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Core\Models\Traits\InteractWithMultiDatabases;
 use App\Models\Game\Auth\Realmlist;
 use Filament\Models\Contracts\HasCurrentTenantLabel;
 use Filament\Models\Contracts\HasName;
@@ -15,6 +16,7 @@ use Spatie\Sluggable\SlugOptions;
 class Realm extends Model implements HasName, HasCurrentTenantLabel
 {
     use HasFactory;
+    use InteractWithMultiDatabases;
     use HasSlug;
 
     //###################################################################################################################
@@ -32,9 +34,11 @@ class Realm extends Model implements HasName, HasCurrentTenantLabel
 
     public function realmlist(): BelongsTo
     {
-        $relation = $this->setConnection('auth')->belongsTo(Realmlist::class);
+        $relation = $this
+            ->setAuthConnection()
+            ->belongsTo(Realmlist::class);
 
-        $this->setConnection('app');
+        $this->setAppConnection();
 
         return $relation;
     }
@@ -60,7 +64,7 @@ class Realm extends Model implements HasName, HasCurrentTenantLabel
 
     public function getCurrentTenantLabel(): string
     {
-        return 'Current Realm';
+        return __('labels.current_realm');
     }
 
     //###################################################################################################################

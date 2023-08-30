@@ -36,7 +36,7 @@ class AccountResource extends Resource
     // FORM
     //###################################################################################################################
 
-    public static function mainForm(): array
+    public static function mainFormSchema(): array
     {
         return [
             Forms\Components\Section::make()
@@ -47,7 +47,7 @@ class AccountResource extends Resource
         ];
     }
 
-    public static function sideForm(): array
+    public static function sideFormSchema(): array
     {
         return [
             Forms\Components\Section::make()

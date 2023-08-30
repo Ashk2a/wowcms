@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\DatabaseCredential;
 use App\Models\GameDatabase;
+use App\Models\Realm;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +20,8 @@ class GameDatabaseFactory extends Factory
     public function definition(): array
     {
         return [
+            'realm_id' => Realm::factory(),
+            'database_credential_id' => DatabaseCredential::factory(),
             'database' => $this->faker->word,
         ];
     }

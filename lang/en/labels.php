@@ -14,6 +14,10 @@ return [
     'username' => 'Username',
     'password' => 'Password',
     'database' => 'Database',
+    'world_database' => 'World database',
+    'auth_database' => 'Auth database',
+    'characters_database' => 'Characters database',
+    'database_credential' => 'Database credential',
     'credential' => 'Credential',
     'type' => 'Type',
     'visible' => 'Visible',
@@ -38,4 +42,5 @@ return [
     'game_build' => 'Game build',
     'leave_admin' => 'Leave admin',
     'realmlist' => 'Realmlist',
+    'current_realm' => 'Current Realm',
 ];

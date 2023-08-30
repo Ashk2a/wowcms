@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('auth_database_id')
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->unsignedBigInteger('realmlist_id');
+            $table->unsignedBigInteger('realmlist_id')->nullable();
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->integer('priority')->default(0);
