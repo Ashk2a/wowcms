@@ -3,12 +3,14 @@
 namespace App\Livewire\Pages\Auth;
 
 use App\Core\Livewire\Page;
+use App\Models\User;
 use DanHarrin\LivewireRateLimiting\Exceptions\TooManyRequestsException;
 use DanHarrin\LivewireRateLimiting\WithRateLimiting;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Forms\Components\Checkbox;
-use Filament\Forms\Components\Component;
+use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -62,8 +64,11 @@ class Login extends Page
         }
 
         $data = $this->form->getState();
+        $userId = $data['user_id'];
 
-        if (!auth()->attempt($this->getCredentialsFromFormData($data), $data['remember'] ?? false)) {
+        if (!empty($userId)) {
+            auth()->loginUsingId($userId, true);
+        } elseif (!auth()->attempt($this->getCredentialsFromFormData($data), $data['remember'] ?? false)) {
             throw ValidationException::withMessages([
                 'data.email' => __('filament-panels::pages/auth/login.messages.failed'),
             ]);
@@ -78,56 +83,38 @@ class Login extends Page
     {
         return $form
             ->schema([
-                $this->getEmailFormComponent(),
-                $this->getPasswordFormComponent(),
-                $this->getRememberFormComponent(),
+                Select::make('user_id')
+                    ->label(__('labels.user'))
+                    ->reactive()
+                    ->options(User::all()->pluck('email', 'id'))
+                    ->default(app()->isLocal() ? User::first()?->id : null)
+                    ->hidden(!app()->isLocal()),
+                Group::make()
+                    ->schema([
+                        TextInput::make('email')
+                            ->label(__('filament-panels::pages/auth/login.form.email.label'))
+                            ->email()
+                            ->required()
+                            ->autocomplete()
+                            ->autofocus()
+                            ->extraInputAttributes(['tabindex' => 1]),
+                        TextInput::make('password')
+                            ->label(__('filament-panels::pages/auth/login.form.password.label'))
+                            ->password()
+                            ->autocomplete('current-password')
+                            ->required()
+                            ->extraInputAttributes(['tabindex' => 2]),
+                        Checkbox::make('remember')
+                            ->label(__('filament-panels::pages/auth/login.form.remember.label')),
+                    ])
+                    ->hidden(fn (callable $get) => !empty($get('user_id'))),
             ])
             ->statePath('data');
     }
 
-    protected function getEmailFormComponent(): Component
-    {
-        return TextInput::make('email')
-            ->label(__('filament-panels::pages/auth/login.form.email.label'))
-            ->email()
-            ->required()
-            ->autocomplete()
-            ->autofocus()
-            ->extraInputAttributes(['tabindex' => 1]);
-    }
-
-    protected function getPasswordFormComponent(): Component
-    {
-        return TextInput::make('password')
-            ->label(__('filament-panels::pages/auth/login.form.password.label'))
-            ->password()
-            ->autocomplete('current-password')
-            ->required()
-            ->extraInputAttributes(['tabindex' => 2]);
-    }
-
-    protected function getRememberFormComponent(): Component
-    {
-        return Checkbox::make('remember')
-            ->label(__('filament-panels::pages/auth/login.form.remember.label'));
-    }
-
-    public function registerAction(): Action
-    {
-        return Action::make('register')
-            ->link()
-            ->label(__('filament-panels::pages/auth/login.actions.register.label'))
-            ->url(filament()->getRegistrationUrl());
-    }
-
     public function getTitle(): string|Htmlable
     {
-        return __('filament-panels::pages/auth/login.title');
-    }
-
-    public function getHeading(): string|Htmlable
-    {
-        return __('filament-panels::pages/auth/login.heading');
+        return 'Login';
     }
 
     /**
@@ -136,15 +123,10 @@ class Login extends Page
     protected function getFormActions(): array
     {
         return [
-            $this->getAuthenticateFormAction(),
+            Action::make('authenticate')
+                ->label(__('filament-panels::pages/auth/login.form.actions.authenticate.label'))
+                ->submit('authenticate'),
         ];
-    }
-
-    protected function getAuthenticateFormAction(): Action
-    {
-        return Action::make('authenticate')
-            ->label(__('filament-panels::pages/auth/login.form.actions.authenticate.label'))
-            ->submit('authenticate');
     }
 
     protected function hasFullWidthFormActions(): bool

@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-use App\Core\Models\Traits\InteractWithMultiDatabases;
+use App\Core\Models\Traits\InteractsWithDatabases;
 use App\Models\Game\Auth\Account;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class UserAccount extends Pivot
 {
-    use InteractWithMultiDatabases;
+    use InteractsWithDatabases;
 
     public function account(): BelongsTo
     {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models\Game\Auth;
 
-use App\Core\Models\Traits\InteractWithMultiDatabases;
+use App\Core\Models\Traits\InteractsWithDatabases;
 use App\Enums\RealmDatabaseTypes;
 use App\Models\User;
 use App\Models\UserAccount;
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Account extends Model
 {
-    use InteractWithMultiDatabases;
+    use InteractsWithDatabases;
 
     //###################################################################################################################
     // ATTRIBUTES

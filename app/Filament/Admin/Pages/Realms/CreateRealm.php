@@ -10,11 +10,11 @@ class CreateRealm extends RegisterTenant
 {
     use RealmFormSchema;
 
-    protected static bool $isCreatePage = true;
-
     public static function getLabel(): string
     {
-        return __('titles.create_new_realm');
+        return __('filament-panels::resources/pages/create-record.title', [
+            'label' => __('labels.realm'),
+        ]);
     }
 
     public function mount(): void

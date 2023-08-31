@@ -31,7 +31,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->darkMode(false)
-            ->tenant(Realm::class, 'slug')
+            ->tenant(Realm::class, 'id')
             ->tenantRegistration(CreateRealm::class)
             ->tenantProfile(EditRealm::class)
             ->renderHook(

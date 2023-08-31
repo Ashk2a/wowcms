@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @mixin Model
  */
-trait InteractWithMultiDatabases
+trait InteractsWithDatabases
 {
     public function setAppConnection(): self
     {

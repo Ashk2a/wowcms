@@ -8,10 +8,12 @@ class EditRealm extends EditTenantProfile
 {
     use RealmFormSchema;
 
-    protected static bool $isCreatePage = false;
+    protected static ?string $slug = 'edit';
 
     public static function getLabel(): string
     {
-        return __('titles.edit_realm');
+        return __('filament-panels::resources/pages/edit-record.title', [
+            'label' => __('labels.realm'),
+        ]);
     }
 }
