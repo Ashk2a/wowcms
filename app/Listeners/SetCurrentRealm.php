@@ -24,6 +24,7 @@ class SetCurrentRealm
         $newRealm = $event->getTenant();
         $currentRealm = $this->realmManager->getCurrent();
 
+        // Avoid unnecessary realm loading if already load.
         if (null !== $currentRealm && $currentRealm->is($newRealm)) {
             return;
         }

@@ -5,9 +5,9 @@ namespace App\Actions\Realm;
 use App\Actions\Database\LoadDatabase;
 use App\Models\Realm;
 
-class LoadRealm
+readonly class LoadRealm
 {
-    public function __construct(private readonly LoadDatabase $loadDatabase)
+    public function __construct(private LoadDatabase $loadDatabase)
     {
     }
 

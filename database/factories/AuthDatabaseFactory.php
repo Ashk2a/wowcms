@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Emulators;
 use App\Models\AuthDatabase;
 use App\Models\DatabaseCredential;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,6 +21,7 @@ class AuthDatabaseFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
+            'emulator' => Emulators::AZEROTHCORE,
             'database_credential_id' => DatabaseCredential::factory(),
             'database' => $this->faker->word,
         ];

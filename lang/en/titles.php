@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'valid_database_connection' => 'Your database connection is valid.',
-    'invalid_database_connection' => 'Your database connection is invalid.',
+    'unavailable_database_credential' => 'Your database credential is invalid.',
+    'unavailable_database_credential_with_database' => 'Your database credential <b>:database_credential_name</b> is invalid with database <b>:database_name</b>.',
 ];

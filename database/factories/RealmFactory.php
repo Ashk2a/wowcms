@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\Emulators;
 use App\Models\AuthDatabase;
 use App\Models\Realm;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,8 +22,8 @@ class RealmFactory extends Factory
         $name = $this->faker->name();
 
         return [
-            'slug' => str($name)->slug(),
             'name' => $name,
+            'emulator' => Emulators::AZEROTHCORE,
             'auth_database_id' => AuthDatabase::factory(),
         ];
     }

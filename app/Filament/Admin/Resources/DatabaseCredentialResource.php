@@ -2,13 +2,16 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Actions\Database\HasAvailableDatabase;
 use App\Core\Filament\Resources\HasSideTemplateForm;
 use App\Core\Filament\Resources\SharedTenantResource;
 use App\Filament\Admin\Resources\DatabaseCredentialResource\Pages;
 use App\Models\DatabaseCredential;
 use App\Tables\Columns\DateColumn;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Support\Exceptions\Halt;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -23,6 +26,8 @@ class DatabaseCredentialResource extends Resource
     //###################################################################################################################
 
     protected static ?string $model = DatabaseCredential::class;
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
 
@@ -39,7 +44,7 @@ class DatabaseCredentialResource extends Resource
                         ->label(__('labels.name'))
                         ->columnSpan(2)
                         ->required()
-                        ->minLength(1)
+                        ->unique(ignoreRecord: true)
                         ->maxLength(255),
                 ]),
             Forms\Components\Section::make()
@@ -66,6 +71,23 @@ class DatabaseCredentialResource extends Resource
                         ->password()
                         ->maxLength(255),
                 ])
+                ->beforeStateDehydrated(function (array $state) {
+                    $isAvailable = resolve(HasAvailableDatabase::class)(
+                        $state['host'],
+                        $state['port'],
+                        $state['username'],
+                        $state['password'],
+                    );
+
+                    if (!$isAvailable) {
+                        Notification::make()
+                            ->danger()
+                            ->title(__('titles.unavailable_database_credential'))
+                            ->send();
+
+                        throw new Halt();
+                    }
+                })
                 ->columns(['xl' => 2]),
         ];
     }

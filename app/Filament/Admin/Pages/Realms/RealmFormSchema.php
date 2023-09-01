@@ -2,14 +2,15 @@
 
 namespace App\Filament\Admin\Pages\Realms;
 
-use App\Actions\DatabaseCredential\CheckDatabaseCredential;
+use App\Actions\Database\HasAvailableDatabase;
+use App\Actions\Database\LoadDatabase;
 use App\Enums\RealmDatabaseTypes;
 use App\Filament\Admin\Resources\AuthDatabaseResource;
 use App\Filament\Admin\Resources\DatabaseCredentialResource;
 use App\Forms\Components\DatePlaceholder;
+use App\Models\AuthDatabase;
 use App\Models\DatabaseCredential;
 use App\Models\Realm;
-use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Repeater;
@@ -19,6 +20,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
+use Filament\Support\Exceptions\Halt;
 use Illuminate\Database\Eloquent\Model;
 
 trait RealmFormSchema
@@ -38,15 +40,25 @@ trait RealmFormSchema
                                     ->maxLength(255),
                                 Select::make('auth_database_id')
                                     ->label(__('labels.auth_database'))
+                                    ->reactive()
+                                    ->required()
                                     ->relationship('authDatabase', 'name')
                                     ->createOptionForm([
                                         Grid::make()->schema(AuthDatabaseResource::formSchema()),
-                                    ]),
-                                /*Select::make('realmlist_id')
+                                    ])
+                                    ->afterStateHydrated(function (?int $state) {
+                                        self::loadAuthDatabase($state);
+                                    })
+                                    ->afterStateUpdated(function (?int $state) {
+                                        self::loadAuthDatabase($state);
+                                    }),
+                                Select::make('realmlist_id')
                                     ->label(__('labels.realmlist'))
+                                    ->reactive()
+                                    ->hidden(fn (callable $get) => empty($get('auth_database_id')))
                                     ->relationship('realmlist', 'name')
                                     ->required()
-                                    ->unique(ignoreRecord: true),*/
+                                    ->unique(ignoreRecord: true),
                             ])
                             ->columns(2),
                         $this->getDatabasesRepeater(),
@@ -110,54 +122,55 @@ trait RealmFormSchema
                             ->required(),
                         TextInput::make('database')
                             ->label(__('labels.database'))
-                            ->suffixAction(function () {
-                                return Action::make('checkDatabase')
-                                    ->icon('heroicon-m-arrow-path')
-                                    ->action(function (TextInput $component, ?string $state, callable $get) {
-                                        $targetStatePath = str($component->getStatePath(false))
-                                            ->replace('database', 'database_credential_id')
-                                            ->value();
-
-                                        $databaseCredential = DatabaseCredential::find($get($targetStatePath));
-
-                                        if (null === $databaseCredential) {
-                                            self::notifyDatabaseState(false);
-
-                                            return false;
-                                        }
-
-                                        $connectionState = app(CheckDatabaseCredential::class)(
-                                            $databaseCredential,
-                                            $state
-                                        );
-
-                                        self::notifyDatabaseState($connectionState);
-
-                                        return $connectionState;
-                                    });
-                            })
                             ->minLength(1)
                             ->maxLength(255)
                             ->required(),
                     ])
+                    ->beforeStateDehydrated(function (array $state) {
+                        $databaseCredential = DatabaseCredential::find($state['database_credential_id']);
+                        $databaseName = $state['database'] ?? null;
+
+                        $isAvailable = !is_null($databaseCredential) && !is_null($databaseName)
+                            ? resolve(HasAvailableDatabase::class)(
+                                $databaseCredential->host,
+                                $databaseCredential->port,
+                                $databaseCredential->username,
+                                $databaseCredential->password,
+                                $state['database'],
+                            )
+                            : false;
+
+                        if (!$isAvailable) {
+                            Notification::make()
+                                ->danger()
+                                ->title(__('titles.unavailable_database_credential_with_database', [
+                                    'database_credential_name' => $databaseCredential?->name,
+                                    'database_name' => $databaseName,
+                                ]))
+                                ->send();
+
+                            throw new Halt();
+                        }
+                    })
                     ->columns(['xl' => 2]),
             ])
             ->addable(false)
             ->deletable(false);
     }
 
-    private static function notifyDatabaseState(bool $isValid): void
+    private static function loadAuthDatabase(?int $authDatabaseId): void
     {
-        $notification = Notification::make()->title(
-            __($isValid ? 'titles.valid_database_connection' : 'titles.invalid_database_connection')
-        );
+        $authDatabase = AuthDatabase::find($authDatabaseId);
 
-        if ($isValid) {
-            $notification->success();
-        } else {
-            $notification->danger();
+        if (null !== $authDatabase) {
+            resolve(LoadDatabase::class)(
+                RealmDatabaseTypes::AUTH->value,
+                $authDatabase->databaseCredential->host,
+                $authDatabase->databaseCredential->port,
+                $authDatabase->databaseCredential->username,
+                $authDatabase->databaseCredential->password,
+                $authDatabase->database,
+            );
         }
-
-        $notification->send();
     }
 }

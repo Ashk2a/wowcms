@@ -4,7 +4,7 @@ namespace App\Actions\Database;
 
 use App\Actions\Database\Concerns\PDOBuilder;
 
-class CheckDatabase
+class HasAvailableDatabase
 {
     use PDOBuilder;
 

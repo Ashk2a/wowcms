@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Models\Traits\InteractsWithDatabases;
+use App\Enums\Emulators;
 use App\Models\Game\Auth\Realmlist;
 use Filament\Models\Contracts\HasCurrentTenantLabel;
 use Filament\Models\Contracts\HasName;
@@ -10,14 +11,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 
 class Realm extends Model implements HasName, HasCurrentTenantLabel
 {
     use HasFactory;
     use InteractsWithDatabases;
-    use HasSlug;
 
     //###################################################################################################################
     // ATTRIBUTES
@@ -27,6 +25,13 @@ class Realm extends Model implements HasName, HasCurrentTenantLabel
      * @var array<int, string>
      */
     protected $guarded = ['id'];
+
+    /**
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'emulator' => Emulators::class,
+    ];
 
     //###################################################################################################################
     // RELATIONS
@@ -65,16 +70,5 @@ class Realm extends Model implements HasName, HasCurrentTenantLabel
     public function getCurrentTenantLabel(): string
     {
         return __('labels.current_realm');
-    }
-
-    //###################################################################################################################
-    // SLUG
-    //###################################################################################################################
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
     }
 }

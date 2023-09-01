@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\Sluggable\SlugOptions;
 
 class DatabaseCredential extends Model
 {
@@ -58,16 +57,5 @@ class DatabaseCredential extends Model
         return $query
             ->where('host', 'like', "%$search%")
             ->orWhere('port', 'like', "%$search%");
-    }
-
-    //###################################################################################################################
-    // SLUG
-    //###################################################################################################################
-
-    public function getSlugOptions(): SlugOptions
-    {
-        return SlugOptions::create()
-            ->generateSlugsFrom('name')
-            ->saveSlugsTo('slug');
     }
 }

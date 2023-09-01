@@ -2,15 +2,17 @@
 
 namespace App\Filament\Admin\Resources;
 
+use App\Actions\Database\HasAvailableDatabase;
 use App\Core\Filament\Resources\HasSideTemplateForm;
 use App\Core\Filament\Resources\SharedTenantResource;
+use App\Enums\Emulators;
 use App\Filament\Admin\Resources\AuthDatabaseResource\Pages;
 use App\Models\AuthDatabase;
+use App\Models\DatabaseCredential;
 use Filament\Forms;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
+use Filament\Support\Exceptions\Halt;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -41,24 +43,56 @@ class AuthDatabaseResource extends Resource
                     Forms\Components\TextInput::make('name')
                         ->label(__('labels.name'))
                         ->required()
+                        ->unique(ignoreRecord: true)
                         ->maxLength(255),
+                    Forms\Components\Select::make('emulator')
+                        ->label(__('labels.emulator'))
+                        ->required()
+                        ->default(Emulators::AZEROTHCORE)
+                        ->options(Emulators::class),
                 ]),
             Forms\Components\Section::make()
                 ->schema([
-                    Select::make('database_credential_id')
+                    Forms\Components\Select::make('database_credential_id')
                         ->label(__('labels.database_credential'))
                         ->preload()
                         ->relationship('databaseCredential', 'name')
                         ->createOptionForm([
-                            Grid::make()->schema(DatabaseCredentialResource::formSchema()),
+                            Forms\Components\Grid::make()->schema(DatabaseCredentialResource::formSchema()),
                         ])
                         ->required(),
-                    TextInput::make('database')
+                    Forms\Components\TextInput::make('database')
                         ->label(__('labels.database'))
                         ->minLength(1)
                         ->maxLength(255)
                         ->required(),
                 ])
+                ->beforeStateDehydrated(function (array $state) {
+                    $databaseCredential = DatabaseCredential::find($state['database_credential_id']);
+                    $databaseName = $state['database'] ?? null;
+
+                    $isAvailable = !is_null($databaseCredential) && !is_null($databaseName)
+                        ? resolve(HasAvailableDatabase::class)(
+                            $databaseCredential->host,
+                            $databaseCredential->port,
+                            $databaseCredential->username,
+                            $databaseCredential->password,
+                            $state['database'],
+                        )
+                        : false;
+
+                    if (!$isAvailable) {
+                        Notification::make()
+                            ->danger()
+                            ->title(__('titles.unavailable_database_credential_with_database', [
+                                'database_credential_name' => $databaseCredential?->name,
+                                'database_name' => $databaseName,
+                            ]))
+                            ->send();
+
+                        throw new Halt();
+                    }
+                })
                 ->columns(['xl' => 2]),
         ];
     }
