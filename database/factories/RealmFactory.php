@@ -19,12 +19,11 @@ class RealmFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->name();
-
         return [
-            'name' => $name,
+            'name' => fake()->name(),
             'emulator' => Emulators::AZEROTHCORE,
             'auth_database_id' => AuthDatabase::factory(),
+            'realmlist_id' => 1,
         ];
     }
 }

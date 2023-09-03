@@ -43,4 +43,5 @@ return [
     'leave_admin' => 'Leave admin',
     'realmlist' => 'Realmlist',
     'current_realm' => 'Current Realm',
+    'emulator' => 'Emulator',
 ];

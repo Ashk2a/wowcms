@@ -44,6 +44,9 @@ class AccountResource extends Resource
                     Forms\Components\TextInput::make('username')
                         ->label(__('labels.username')),
                 ]),
+            Forms\Components\Select::make('user_id')
+                ->label(__('labels.user'))
+                ->relationship('user', 'email')
         ];
     }
 
@@ -90,10 +93,8 @@ class AccountResource extends Resource
                             ? UserResource::getUrl('edit', ['record' => $account->userAccount->user])
                             : null
                         ),
-                        true
-                    )
-                    ->searchable()
-                    ->sortable(),
+                        fn (Account $account) => !is_null($account->userAccount)
+                    ),
                 Tables\Columns\TextColumn::make('username')
                     ->label(__('labels.username')),
                 DateColumn::make('last_login')
