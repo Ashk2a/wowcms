@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Enums\RealmDatabaseTypes;
-use App\Models\AuthDatabase;
 use App\Models\DatabaseCredential;
 use App\Models\Realm;
 use Illuminate\Database\Seeder;
@@ -26,13 +25,7 @@ class RealmSeeder extends Seeder
                 'password' => $testingDatabaseRealmConfig['password'],
             ]);
 
-            $realm = Realm::factory()->create([
-                'auth_database_id' => AuthDatabase::factory()->state([
-                    'name' => 'Test auth database',
-                    'database_credential_id' => $databaseCredential,
-                    'database' => $testingDatabaseRealmConfig['databases'][RealmDatabaseTypes::AUTH->value],
-                ]),
-            ]);
+            $realm = Realm::factory()->create();
 
             $realm->gameDatabases()->createMany(
                 collect(RealmDatabaseTypes::getGameDatabases())

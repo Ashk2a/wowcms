@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Models\Game\Auth;
 
 use App\Core\Models\Traits\InteractsWithDatabases;
-use App\Enums\RealmDatabaseTypes;
 use App\Models\User;
 use App\Models\UserAccount;
 use Illuminate\Database\Eloquent\Model;
@@ -20,7 +19,7 @@ class Account extends Model
     // ATTRIBUTES
     //###################################################################################################################
 
-    public $connection = RealmDatabaseTypes::AUTH->value;
+    public $connection = 'auth';
 
     public $table = 'account';
 

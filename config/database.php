@@ -60,13 +60,15 @@ return [
             'options' => [],
         ],
 
-        RealmDatabaseTypes::AUTH->value => [
+        'auth' => [
             'driver' => 'mysql',
-            'host' => '127.0.0.1',
-            'port' => '3306',
-            'database' => 'database',
-            'username' => 'username',
-            'password' => 'password',
+            'url' => env('DATABASE_AUTH_URL'),
+            'host' => env('DB_AUTH_HOST', '127.0.0.1'),
+            'port' => env('DB_AUTH_PORT', '3306'),
+            'database' => env('DB_AUTH_DATABASE', 'forge'),
+            'username' => env('DB_AUTH_USERNAME', 'forge'),
+            'password' => env('DB_AUTH_PASSWORD', ''),
+            'unix_socket' => env('DB_AUTH_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',

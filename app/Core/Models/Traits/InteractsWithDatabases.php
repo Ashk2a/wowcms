@@ -17,7 +17,7 @@ trait InteractsWithDatabases
 
     public function setAuthConnection(): self
     {
-        return $this->setConnection(RealmDatabaseTypes::AUTH->value);
+        return $this->setConnection('auth');
     }
 
     public function setCharactersConnection(): self

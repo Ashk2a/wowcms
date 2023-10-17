@@ -48,11 +48,6 @@ class Realm extends Model implements HasCurrentTenantLabel, HasName
         return $relation;
     }
 
-    public function authDatabase(): BelongsTo
-    {
-        return $this->belongsTo(AuthDatabase::class);
-    }
-
     public function gameDatabases(): HasMany
     {
         return $this->hasMany(GameDatabase::class);

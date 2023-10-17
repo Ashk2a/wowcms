@@ -15,9 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('emulator');
-            $table->foreignId('auth_database_id')
-                ->constrained()
-                ->cascadeOnDelete();
             $table->unsignedBigInteger('realmlist_id');
             $table->integer('priority')->default(0);
             $table->boolean('is_visible')->default(true);

@@ -11,7 +11,6 @@ return [
             'username' => env('TESTING_DB_REALM_USERNAME', 'root'),
             'password' => env('TESTING_DB_REALM_PASSWORD', 'password'),
             'databases' => [
-                RealmDatabaseTypes::AUTH->value => env('TESTING_DB_REALM_AUTH_DATABASE', 'acore_auth'),
                 RealmDatabaseTypes::CHARACTERS->value => env('TESTING_DB_REALM_CHARACTERS_DATABASE', 'acore_characters'),
                 RealmDatabaseTypes::WORLD->value => env('TESTING_DB_REALM_WORLD_DATABASE', 'acore_world'),
             ],

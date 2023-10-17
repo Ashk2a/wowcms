@@ -15,9 +15,6 @@ return new class extends Migration
             $table->foreignId('user_id')
                 ->constrained()
                 ->cascadeOnDelete();
-            $table->foreignId('auth_database_id')
-                ->constrained()
-                ->cascadeOnDelete();
             $table->unsignedBigInteger('account_id')->unique();
             $table->timestamps();
         });

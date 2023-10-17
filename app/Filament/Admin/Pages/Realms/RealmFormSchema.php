@@ -3,12 +3,9 @@
 namespace App\Filament\Admin\Pages\Realms;
 
 use App\Actions\Database\HasAvailableDatabase;
-use App\Actions\Database\LoadDatabase;
 use App\Enums\RealmDatabaseTypes;
-use App\Filament\Admin\Resources\AuthDatabaseResource;
 use App\Filament\Admin\Resources\DatabaseCredentialResource;
 use App\Forms\Components\DatePlaceholder;
-use App\Models\AuthDatabase;
 use App\Models\DatabaseCredential;
 use App\Models\Realm;
 use Filament\Forms\Components\Grid;
@@ -38,24 +35,9 @@ trait RealmFormSchema
                                     ->required()
                                     ->minLength(1)
                                     ->maxLength(255),
-                                Select::make('auth_database_id')
-                                    ->label(__('labels.auth_database'))
-                                    ->reactive()
-                                    ->required()
-                                    ->relationship('authDatabase', 'name')
-                                    ->createOptionForm([
-                                        Grid::make()->schema(AuthDatabaseResource::formSchema()),
-                                    ])
-                                    ->afterStateHydrated(function (?int $state) {
-                                        self::loadAuthDatabase($state);
-                                    })
-                                    ->afterStateUpdated(function (?int $state) {
-                                        self::loadAuthDatabase($state);
-                                    }),
                                 Select::make('realmlist_id')
                                     ->label(__('labels.realmlist'))
                                     ->reactive()
-                                    ->hidden(fn (callable $get) => empty($get('auth_database_id')))
                                     ->relationship('realmlist', 'name')
                                     ->required()
                                     ->unique(ignoreRecord: true),
@@ -156,21 +138,5 @@ trait RealmFormSchema
             ])
             ->addable(false)
             ->deletable(false);
-    }
-
-    private static function loadAuthDatabase(?int $authDatabaseId): void
-    {
-        $authDatabase = AuthDatabase::find($authDatabaseId);
-
-        if (null !== $authDatabase) {
-            resolve(LoadDatabase::class)(
-                RealmDatabaseTypes::AUTH->value,
-                $authDatabase->databaseCredential->host,
-                $authDatabase->databaseCredential->port,
-                $authDatabase->databaseCredential->username,
-                $authDatabase->databaseCredential->password,
-                $authDatabase->database,
-            );
-        }
     }
 }
