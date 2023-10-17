@@ -18,8 +18,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class DatabaseCredentialResource extends Resource
 {
-    use SharedTenantResource;
     use HasSideTemplateForm;
+    use SharedTenantResource;
 
     //###################################################################################################################
     // ATTRIBUTES

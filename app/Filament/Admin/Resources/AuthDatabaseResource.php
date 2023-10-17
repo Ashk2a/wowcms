@@ -18,8 +18,8 @@ use Filament\Tables\Table;
 
 class AuthDatabaseResource extends Resource
 {
-    use SharedTenantResource;
     use HasSideTemplateForm;
+    use SharedTenantResource;
 
     //###################################################################################################################
     // ATTRIBUTES

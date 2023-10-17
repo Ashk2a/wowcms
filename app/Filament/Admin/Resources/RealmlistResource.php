@@ -14,8 +14,8 @@ use Filament\Tables\Table;
 
 class RealmlistResource extends Resource
 {
-    use SharedTenantResource;
     use HasSideTemplateForm;
+    use SharedTenantResource;
 
     //###################################################################################################################
     // ATTRIBUTES

@@ -19,8 +19,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class AccountResource extends Resource
 {
-    use SharedTenantResource;
     use HasSideTemplateForm;
+    use SharedTenantResource;
 
     //###################################################################################################################
     // ATTRIBUTES
@@ -46,7 +46,7 @@ class AccountResource extends Resource
                 ]),
             Forms\Components\Select::make('user_id')
                 ->label(__('labels.user'))
-                ->relationship('user', 'email')
+                ->relationship('user', 'email'),
         ];
     }
 

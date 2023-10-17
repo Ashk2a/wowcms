@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Realm extends Model implements HasName, HasCurrentTenantLabel
+class Realm extends Model implements HasCurrentTenantLabel, HasName
 {
     use HasFactory;
     use InteractsWithDatabases;

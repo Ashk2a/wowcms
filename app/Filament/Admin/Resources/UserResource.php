@@ -15,8 +15,8 @@ use Filament\Tables\Table;
 
 class UserResource extends Resource
 {
-    use SharedTenantResource;
     use HasSideTemplateForm;
+    use SharedTenantResource;
 
     //###################################################################################################################
     // ATTRIBUTES

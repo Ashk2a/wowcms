@@ -7,13 +7,12 @@ use Filament\Actions\Concerns\InteractsWithActions;
 use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
-use Filament\Tables\Contracts\RendersActionModal;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Contracts\View\View;
 use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
-abstract class Page extends Component implements HasForms, HasActions, RendersActionModal
+abstract class Page extends Component implements HasActions, HasForms
 {
     use InteractsWithActions;
     use InteractsWithForms;
