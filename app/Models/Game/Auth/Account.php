@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Models\Game\Auth;
 
 use App\Core\Models\Traits\InteractsWithDatabases;
+use App\Models\Game\Character\Character;
 use App\Models\User;
 use App\Models\UserAccount;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Account extends Model
@@ -62,6 +64,17 @@ class Account extends Model
                 'id',
                 'user_id'
             );
+
+        $this->setAuthConnection();
+
+        return $relation;
+    }
+
+    public function characters(): HasMany
+    {
+        $relation = $this
+            ->setCharactersConnection()
+            ->hasMany(Character::class, 'account');
 
         $this->setAuthConnection();
 
