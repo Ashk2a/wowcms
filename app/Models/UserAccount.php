@@ -4,10 +4,10 @@ namespace App\Models;
 
 use App\Core\Models\Traits\InteractsWithDatabases;
 use App\Models\Game\Auth\Account;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class UserAccount extends Pivot
+class UserAccount extends Model
 {
     use InteractsWithDatabases;
 

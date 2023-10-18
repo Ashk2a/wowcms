@@ -8,16 +8,15 @@ use App\Core\Models\Traits\InteractsWithDatabases;
 use App\Models\User;
 use App\Models\UserAccount;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Account extends Model
 {
     use InteractsWithDatabases;
 
-    //###################################################################################################################
+    //##################################################################################################################
     // ATTRIBUTES
-    //###################################################################################################################
+    //##################################################################################################################
 
     public $connection = 'auth';
 
@@ -47,20 +46,9 @@ class Account extends Model
         'last_login' => 'datetime',
     ];
 
-    //###################################################################################################################
+    //##################################################################################################################
     // RELATIONS
-    //###################################################################################################################
-
-    public function userAccount(): HasOne
-    {
-        $relation = $this
-            ->setAppConnection()
-            ->hasOne(UserAccount::class);
-
-        $this->setAuthConnection();
-
-        return $relation;
-    }
+    //##################################################################################################################
 
     public function user(): HasOneThrough
     {

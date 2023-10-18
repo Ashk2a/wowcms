@@ -1,6 +1,5 @@
 <?php
 
-use App\Enums\RealmDatabaseTypes;
 use Illuminate\Support\Str;
 
 return [
@@ -78,7 +77,7 @@ return [
             'options' => [],
         ],
 
-        RealmDatabaseTypes::CHARACTERS->value => [
+        'characters' => [
             'driver' => 'mysql',
             'host' => '127.0.0.1',
             'port' => '3306',
@@ -94,7 +93,7 @@ return [
             'options' => [],
         ],
 
-        RealmDatabaseTypes::WORLD->value => [
+        'world' => [
             'driver' => 'mysql',
             'host' => '127.0.0.1',
             'port' => '3306',

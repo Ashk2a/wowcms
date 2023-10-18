@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Game\Auth\Account;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -12,9 +13,11 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
+        $user = User::factory()->create([
             'nickname' => 'Admin',
             'email' => 'admin@example.com',
         ]);
+
+        $account = Account::query()->first();
     }
 }

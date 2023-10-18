@@ -22,7 +22,7 @@ class CreateRealm extends RegisterTenant
         parent::mount();
 
         $this->form->fill([
-            'gameDatabases' => collect(RealmDatabaseTypes::cases())
+            'gameDatabases' => collect(RealmDatabaseTypes::getGameDatabases())
                 ->map(fn (RealmDatabaseTypes $realmDatabaseType) => [
                     'database' => '',
                     'database_credential_id' => null,
