@@ -5,6 +5,7 @@ namespace App\Filament\Admin\Resources;
 use App\Core\Filament\Resources\HasSideTemplateForm;
 use App\Core\Filament\Resources\SharedTenantResource;
 use App\Filament\Admin\Resources\AccountResource\Pages;
+use App\Filament\Admin\Resources\AccountResource\RelationManagers\CharactersRelationManager;
 use App\Forms\Components\DatePlaceholder;
 use App\Models\Game\Auth\Account;
 use App\Tables\Columns\DateColumn;
@@ -125,6 +126,7 @@ class AccountResource extends Resource
     public static function getRelations(): array
     {
         return [
+            CharactersRelationManager::class,
         ];
     }
 

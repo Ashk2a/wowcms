@@ -19,5 +19,11 @@ class UserSeeder extends Seeder
         ]);
 
         $account = Account::query()->first();
+
+        if ($account) {
+            $user->userAccounts()->create([
+                'account_id' => $account->id,
+            ]);
+        }
     }
 }

@@ -6,12 +6,15 @@ use App\Filament\Admin\Resources\AccountResource;
 use App\Models\UserAccount;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Resources\Concerns\HasTabs;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 
 class AccountsRelationManager extends RelationManager
 {
+    use HasTabs;
+
     protected static string $relationship = 'userAccounts';
 
     public function form(Form $form): Form
@@ -33,7 +36,6 @@ class AccountsRelationManager extends RelationManager
                     ->label(__('labels.username')),
             ])
             ->filters([
-                //
             ])
             ->actions([
                 Tables\Actions\Action::make('edit')
@@ -41,7 +43,6 @@ class AccountsRelationManager extends RelationManager
                     ->url(fn (UserAccount $record) => AccountResource::getUrl('edit', ['record' => $record->account]))
                     ->openUrlInNewTab(),
             ])
-            ->emptyStateActions([
-            ]);
+            ->emptyStateActions([]);
     }
 }

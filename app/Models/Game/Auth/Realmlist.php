@@ -17,9 +17,9 @@ class Realmlist extends Model
     // ATTRIBUTES
     //##################################################################################################################
 
-    public $connection = 'auth';
+    protected $connection = 'auth';
 
-    public $table = 'realmlist';
+    protected $table = 'realmlist';
 
     /**
      * @var array<int, string>

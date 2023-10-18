@@ -3,6 +3,7 @@
 namespace App\Filament\Admin\Pages\Realms;
 
 use App\Actions\Database\HasAvailableDatabase;
+use App\Enums\Emulators;
 use App\Enums\RealmDatabaseTypes;
 use App\Filament\Admin\Resources\DatabaseCredentialResource;
 use App\Forms\Components\DatePlaceholder;
@@ -35,6 +36,10 @@ trait RealmFormSchema
                                     ->required()
                                     ->minLength(1)
                                     ->maxLength(255),
+                                Select::make('emulator')
+                                    ->label(__('labels.emulator'))
+                                    ->options(Emulators::class)
+                                    ->required(),
                                 Select::make('realmlist_id')
                                     ->label(__('labels.realmlist'))
                                     ->reactive()

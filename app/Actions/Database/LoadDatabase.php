@@ -47,5 +47,6 @@ class LoadDatabase
         config()->set($databaseConfigKey, $newDatabaseConnection);
 
         DB::purge($connectionName);
+        DB::reconnect($connectionName);
     }
 }

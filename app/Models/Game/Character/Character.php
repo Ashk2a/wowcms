@@ -6,7 +6,6 @@ namespace App\Models\Game\Character;
 
 use App\Core\Models\Traits\InteractsWithDatabases;
 use App\Models\Game\Auth\Account;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -18,7 +17,9 @@ class Character extends Model
     // ATTRIBUTES
     //##################################################################################################################
 
-    public $connection = 'characters';
+    protected $connection = 'characters';
+
+    protected $primaryKey = 'guid';
 
     public $timestamps = false;
 

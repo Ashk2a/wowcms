@@ -20,9 +20,9 @@ class Account extends Model
     // ATTRIBUTES
     //##################################################################################################################
 
-    public $connection = 'auth';
+    protected $connection = 'auth';
 
-    public $table = 'account';
+    protected $table = 'account';
 
     public $timestamps = false;
 
