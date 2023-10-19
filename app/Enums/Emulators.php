@@ -12,6 +12,8 @@ enum Emulators: string implements HasLabel
 
     public function getLabel(): ?string
     {
-        return $this->value;
+        return str($this->value)
+            ->title()
+            ->toString();
     }
 }

@@ -27,11 +27,6 @@ return new class extends Migration
                 'realm_id',
                 'type',
             ]);
-
-            $table->unique([
-                'database_credential_id',
-                'database',
-            ]);
         });
     }
 

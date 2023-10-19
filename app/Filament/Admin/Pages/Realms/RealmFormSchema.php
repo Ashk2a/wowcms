@@ -11,6 +11,7 @@ use App\Models\DatabaseCredential;
 use App\Models\Realm;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Group;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -85,20 +86,18 @@ trait RealmFormSchema
     private function getDatabasesRepeater(): Repeater
     {
         return Repeater::make('gameDatabases')
-            ->hiddenLabel(true)
             ->relationship('gameDatabases')
             ->itemLabel(fn (array $state) => match ($state['type']) {
-                RealmDatabaseTypes::WORLD->value => __('labels.world_database'),
-                RealmDatabaseTypes::CHARACTERS->value => __('labels.characters_database'),
+                RealmDatabaseTypes::WORLD => __('labels.world_database'),
+                RealmDatabaseTypes::CHARACTERS => __('labels.characters_database'),
                 default => null,
             })
             ->schema([
                 Grid::make()
                     ->schema([
-                        TextInput::make('type')
+                        Hidden::make('type')
                             ->label(__('labels.type'))
-                            ->required()
-                            ->hidden(),
+                            ->required(),
                         Select::make('database_credential_id')
                             ->label(__('labels.database_credential'))
                             ->preload()
