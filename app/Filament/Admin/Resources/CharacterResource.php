@@ -4,70 +4,46 @@ namespace App\Filament\Admin\Resources;
 
 use App\Core\Filament\Resources\HasSideTemplateForm;
 use App\Core\Filament\Resources\SharedTenantResource;
-use App\Filament\Admin\Resources\AccountResource\Pages;
-use App\Filament\Admin\Resources\AccountResource\RelationManagers\CharactersRelationManager;
-use App\Forms\Components\DatePlaceholder;
-use App\Models\Game\Auth\Account;
+use App\Filament\Admin\Resources\CharacterResource\Pages;
+use App\Models\Game\Character\Character;
 use App\Tables\Columns\DateColumn;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Vite;
 
-class AccountResource extends Resource
+class CharacterResource extends Resource
 {
     use HasSideTemplateForm;
     use SharedTenantResource;
+
+    public const IMAGE_RACE_PATH = 'resources/images/races/%s-%s.png';
+
+    public const IMAGE_CLASS_PATH = 'resources/images/classes/%s.png';
 
     //##################################################################################################################
     // ATTRIBUTES
     //##################################################################################################################
 
-    protected static ?string $model = Account::class;
+    protected static ?string $model = Character::class;
 
-    protected static ?string $recordTitleAttribute = 'username';
+    protected static ?string $recordTitleAttribute = 'name';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     //##################################################################################################################
     // FORM
     //##################################################################################################################
 
-    public static function mainFormSchema(): array
+    public static function form(Form $form): Form
     {
-        return [
-            Forms\Components\Section::make()
-                ->schema([
-                    Forms\Components\TextInput::make('username')
-                        ->label(__('labels.username')),
-                ]),
-        ];
-    }
-
-    public static function sideFormSchema(): array
-    {
-        return [
-            Forms\Components\Section::make()
-                ->schema([
-                    DatePlaceholder::make('joindate')
-                        ->label(__('labels.created_at'))
-                        ->showDate(),
-                    DatePlaceholder::make('last_login')
-                        ->label(__('labels.last_login'))
-                        ->showDate(),
-                ]),
-            Forms\Components\Section::make()
-                ->schema([
-                    Forms\Components\Toggle::make('online')
-                        ->label(__('labels.online'))
-                        ->disabled(),
-                    Forms\Components\Toggle::make('locked')
-                        ->label(__('labels.locked')),
-                ]),
-        ];
+        return $form
+            ->schema([
+                //
+            ]);
     }
 
     //##################################################################################################################
@@ -78,30 +54,35 @@ class AccountResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->label(__('labels.id'))
+                Tables\Columns\TextColumn::make('guid')
+                    ->label(__('labels.guid'))
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user.email')
-                    ->label(__('labels.user'))
+                Tables\Columns\TextColumn::make('authAccount.username')
+                    ->label(__('labels.account'))
                     ->icon('heroicon-o-user')
                     ->color('primary')
-                    ->url(
-                        fn (Account $account) => ($account->user
-                            ? UserResource::getUrl('edit', ['record' => $account->user])
-                            : null
-                        ),
-                    ),
-                Tables\Columns\TextColumn::make('username')
-                    ->label(__('labels.username')),
-                Tables\Columns\TextColumn::make('characters_count')
-                    ->label(__('labels.characters_count')),
-                DateColumn::make('last_login')
-                    ->label(__('labels.last_login'))
-                    ->formatDateState()
-                    ->showTooltip(),
-                DateColumn::make('joindate')
-                    ->label(__('labels.created_at'))
+                    ->url(fn (Character $record) => AccountResource::getUrl('edit', ['record' => $record->authAccount])),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\ImageColumn::make('race')
+                    ->size(25)
+                    ->getStateUsing(fn (Character $record) => Vite::asset(
+                        sprintf(
+                            self::IMAGE_RACE_PATH,
+                            $record->race,
+                            $record->gender
+                        )
+                    )),
+                Tables\Columns\ImageColumn::make('class')
+                    ->size(25)
+                    ->getStateUsing(fn (Character $record) => Vite::asset(
+                        sprintf(
+                            self::IMAGE_CLASS_PATH,
+                            $record->class,
+                        )
+                    )),
+                Tables\Columns\TextColumn::make('level'),
+                DateColumn::make('creation_date')
                     ->formatDateState()
                     ->showTooltip(),
             ])
@@ -122,7 +103,7 @@ class AccountResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CharactersRelationManager::class,
+            //
         ];
     }
 
@@ -133,9 +114,9 @@ class AccountResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAccounts::route('/'),
-            'create' => Pages\CreateAccount::route('/create'),
-            'edit' => Pages\EditAccount::route('/{record}/edit'),
+            'index' => Pages\ListCharacters::route('/'),
+            'create' => Pages\CreateCharacter::route('/create'),
+            'edit' => Pages\EditCharacter::route('/{record}/edit'),
         ];
     }
 
@@ -168,12 +149,9 @@ class AccountResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return Account::query()
+        return Character::query()
             ->with([
-                'user',
-            ])
-            ->withCount([
-                'characters',
+                'authAccount',
             ]);
     }
 }

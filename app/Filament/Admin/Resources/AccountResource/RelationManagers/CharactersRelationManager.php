@@ -2,12 +2,16 @@
 
 namespace App\Filament\Admin\Resources\AccountResource\RelationManagers;
 
+use App\Filament\Admin\Resources\CharacterResource;
+use App\Models\Game\Character\Character;
+use App\Tables\Columns\DateColumn;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Concerns\HasTabs;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Vite;
 
 class CharactersRelationManager extends RelationManager
 {
@@ -30,14 +34,34 @@ class CharactersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('name')
             ->columns([
+                Tables\Columns\TextColumn::make('guid')
+                    ->label(__('labels.guid')),
                 Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\ImageColumn::make('race')
+                    ->size(25)
+                    ->getStateUsing(fn (Character $record) => Vite::asset(
+                        sprintf(
+                            CharacterResource::IMAGE_RACE_PATH,
+                            $record->race,
+                            $record->gender
+                        )
+                    )),
+                Tables\Columns\ImageColumn::make('class')
+                    ->size(25)
+                    ->getStateUsing(fn (Character $record) => Vite::asset(
+                        sprintf(
+                            CharacterResource::IMAGE_CLASS_PATH,
+                            $record->class,
+                        )
+                    )),
+                Tables\Columns\TextColumn::make('level'),
+                DateColumn::make('creation_date')
+                    ->formatDateState()
+                    ->showTooltip(),
             ])
             ->filters([])
             ->headerActions([])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
+            ->actions([])
             ->bulkActions([])
             ->emptyStateActions([]);
     }

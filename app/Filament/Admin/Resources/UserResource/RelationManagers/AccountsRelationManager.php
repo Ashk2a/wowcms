@@ -32,16 +32,19 @@ class AccountsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('account.username')
             ->columns([
+                Tables\Columns\TextColumn::make('account.id')
+                    ->label(__('labels.id')),
                 Tables\Columns\TextColumn::make('account.username')
                     ->label(__('labels.username')),
+                Tables\Columns\TextColumn::make('characters_count')
+                    ->label(__('labels.characters_count'))
+                    ->getStateUsing(fn (UserAccount $record) => $record->account->characters->count()),
             ])
-            ->filters([
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\Action::make('edit')
                     ->icon('heroicon-m-pencil-square')
-                    ->url(fn (UserAccount $record) => AccountResource::getUrl('edit', ['record' => $record->account]))
-                    ->openUrlInNewTab(),
+                    ->url(fn (UserAccount $record) => AccountResource::getUrl('edit', ['record' => $record->account])),
             ])
             ->emptyStateActions([]);
     }
