@@ -85,15 +85,17 @@ class AccountResource extends Resource
                 Tables\Columns\TextColumn::make('user.email')
                     ->label(__('labels.user'))
                     ->icon('heroicon-o-user')
+                    ->color('primary')
                     ->url(
                         fn (Account $account) => ($account->user
                             ? UserResource::getUrl('edit', ['record' => $account->user])
                             : null
                         ),
-                        fn (Account $account) => !is_null($account->user)
                     ),
                 Tables\Columns\TextColumn::make('username')
                     ->label(__('labels.username')),
+                Tables\Columns\TextColumn::make('characters_count')
+                    ->label(__('labels.characters_count')),
                 DateColumn::make('last_login')
                     ->label(__('labels.last_login'))
                     ->formatDateState()
@@ -109,14 +111,8 @@ class AccountResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])
-            ->emptyStateActions([
-                Tables\Actions\CreateAction::make(),
-            ]);
+            ->bulkActions([])
+            ->emptyStateActions([]);
     }
 
     //##################################################################################################################
@@ -157,11 +153,6 @@ class AccountResource extends Resource
         return false;
     }
 
-    public static function canDeleteAny(): bool
-    {
-        return false;
-    }
-
     //##################################################################################################################
     // NAVIGATION
     //##################################################################################################################
@@ -178,6 +169,11 @@ class AccountResource extends Resource
     public static function getEloquentQuery(): Builder
     {
         return Account::query()
-            ->with('user');
+            ->with([
+                'user',
+            ])
+            ->withCount([
+                'characters',
+            ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Tables\Columns;
 use Carbon\CarbonInterface;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class DateColumn extends TextColumn
 {
@@ -22,10 +23,14 @@ class DateColumn extends TextColumn
         return $this;
     }
 
-    protected function formatDate(?CarbonInterface $date, bool $withDiffForHuman = false): ?string
+    protected function formatDate(null|CarbonInterface|string $date, bool $withDiffForHuman = false): ?string
     {
         if (null === $date) {
             return null;
+        }
+
+        if (is_string($date)) {
+            $date = Carbon::parse($date);
         }
 
         return $withDiffForHuman ? $date->diffForHumans() : $date;

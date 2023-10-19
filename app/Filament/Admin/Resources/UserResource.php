@@ -163,6 +163,7 @@ class UserResource extends Resource
         return User::query()
             ->with([
                 'userAccounts.account',
+                'userAccounts.account.characters',
             ]);
     }
 }

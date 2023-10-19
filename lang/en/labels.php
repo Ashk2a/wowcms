@@ -2,6 +2,8 @@
 
 return [
     'id' => 'ID',
+    'guid' => 'GUID',
+    'account' => 'Account',
     'name' => 'Name',
     'nickname' => 'Nickname',
     'email' => 'Email',
@@ -12,6 +14,8 @@ return [
     'host' => 'Host',
     'port' => 'Port',
     'username' => 'Username',
+    'character' => 'Character',
+    'characters_count' => 'Characters count',
     'password' => 'Password',
     'database' => 'Database',
     'world_database' => 'World database',
