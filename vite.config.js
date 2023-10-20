@@ -13,7 +13,6 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/shared.js',
             ],
             refresh: [
                 ...refreshPaths,
@@ -23,6 +22,7 @@ export default defineConfig({
                 'app/Providers/Filament/**',
                 'app/Tables/Columns/**',
                 'lang/**',
+                'themes/**/resources/**'
             ],
         }),
     ],

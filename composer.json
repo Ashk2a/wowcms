@@ -12,6 +12,7 @@
         "ext-pdo": "*",
         "filament/filament": "^3.0-stable",
         "guzzlehttp/guzzle": "^7.2",
+        "hexadog/laravel-themes-manager": "^1.10",
         "laravel/framework": "^10.10",
         "laravel/tinker": "^2.8",
         "pusher/pusher-php-server": "^7.2",
@@ -75,7 +76,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "hexadog/laravel-theme-installer": true
         }
     },
     "minimum-stability": "dev",
