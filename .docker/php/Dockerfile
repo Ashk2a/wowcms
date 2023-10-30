@@ -41,6 +41,7 @@ RUN install-php-extensions \
     gd \
     bcmath \
     zip \
+    xdebug \
     @composer
 
 # Timezone

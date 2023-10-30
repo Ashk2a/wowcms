@@ -24,17 +24,6 @@
             },
             {
                 "type": "compose",
-                "entry": "sh",
-                "names": ["sh:node"],
-                "containers": [
-                    {
-                        "name": "node"
-                    }
-                ],
-                "description": "Enter in node container shell"
-            },
-            {
-                "type": "compose",
                 "entry": "php",
                 "containers": [
                     {
@@ -92,7 +81,7 @@
                 ],
                 "containers": [
                     {
-                        "name": "node"
+                        "name": "php"
                     }
                 ],
                 "description": "Run yarn"

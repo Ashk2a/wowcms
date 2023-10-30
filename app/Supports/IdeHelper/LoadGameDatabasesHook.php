@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Support\IdeHelper;
+namespace App\Supports\IdeHelper;
 
 use App\Actions\Database\LoadDatabase;
 use Barryvdh\LaravelIdeHelper\Console\ModelsCommand;

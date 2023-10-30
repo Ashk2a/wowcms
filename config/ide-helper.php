@@ -3,7 +3,7 @@
 use App\Models\Game\Auth\Account;
 use App\Models\Game\Auth\Realmlist;
 use App\Models\UserAccount;
-use App\Support\IdeHelper\LoadGameDatabasesHook;
+use App\Supports\IdeHelper\LoadGameDatabasesHook;
 
 return [
     /*

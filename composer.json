@@ -21,6 +21,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",
         "barryvdh/laravel-ide-helper": "^2.13",
+        "cweagans/composer-patches": "^1.7",
         "fakerphp/faker": "^1.9.1",
         "laradumps/laradumps": "^2.2",
         "laravel/pint": "^1.0",
@@ -29,7 +30,8 @@
         "phpunit/phpunit": "^10.1",
         "roave/security-advisories": "dev-latest",
         "spatie/laravel-ignition": "^2.0",
-        "spatie/laravel-ray": "^1.32"
+        "spatie/laravel-ray": "^1.32",
+        "symplify/vendor-patches": "^11.2"
     },
     "autoload": {
         "psr-4": {
@@ -77,7 +79,8 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true,
-            "hexadog/laravel-theme-installer": true
+            "hexadog/laravel-theme-installer": true,
+            "cweagans/composer-patches": true
         }
     },
     "minimum-stability": "dev",

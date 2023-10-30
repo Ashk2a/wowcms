@@ -25,6 +25,8 @@ services:
             - redis
         expose:
             - 80
+        ports:
+            - '${VITE_FORWARDED_PORT:-5173}:5173'
         labels:
             - traefik.enable=true
             - traefik.http.routers.${COMPOSE_PROJECT_NAME}_php.entrypoints=https
@@ -51,30 +53,6 @@ services:
         depends_on:
             - mariadb
             - redis
-
-    node:
-        container_name: ${COMPOSE_PROJECT_NAME}_node
-        restart: unless-stopped
-        build:
-            context: ./.docker/node
-            dockerfile: Dockerfile
-            target: local-node
-        volumes:
-            - ./:/var/www/app
-        extra_hosts:
-            - host.docker.internal:host-gateway
-        ports:
-            - '${VITE_FORWARDED_PORT:-5173}:5173'
-        networks:
-            - default
-            - proxy
-        labels:
-            - traefik.enable=true
-            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_node.entrypoints=https
-            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_node.rule=Host(`${VITE_DOMAIN:-vite.cms.test}`)
-            - traefik.http.services.${COMPOSE_PROJECT_NAME}_node.loadbalancer.server.port=5173
-            - traefik.http.routers.${COMPOSE_PROJECT_NAME}_node.tls=true
-            - traefik.docker.network=proxy
 
     mariadb:
         container_name: ${COMPOSE_PROJECT_NAME}_mariadb
