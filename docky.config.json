@@ -1,91 +1,102 @@
 {
-  "debug": false,
-  "hooks": [],
-  "commands": {
-    "internals": [
-      "up",
-      "stop",
-      "down",
-      "restart",
-      "ps",
-      "logs",
-      "exec"
-    ],
-    "customs": [
-      {
-        "type": "compose",
-        "entry": "sh",
-        "containers": [
-          {
-            "name": "php"
-          }
+    "debug": false,
+    "hooks": [],
+    "commands": {
+        "internals": [
+            "up",
+            "stop",
+            "down",
+            "restart",
+            "ps",
+            "logs",
+            "exec"
         ],
-        "description": "Enter in php container shell"
-      },
-      {
-        "type": "compose",
-        "entry": "php",
-        "containers": [
-          {
-            "name": "php"
-          }
-        ],
-        "description": "Run php"
-      },
-      {
-        "type": "compose",
-        "entry": "php artisan",
-        "names": [
-          "artisan",
-          "a"
-        ],
-        "containers": [
-          {
-            "name": "php"
-          }
-        ],
-        "description": "Run artisan"
-      },
-      {
-        "type": "compose",
-        "entry": "composer",
-        "names": [
-          "composer",
-          "c"
-        ],
-        "containers": [
-          {
-            "name": "php"
-          }
-        ],
-        "description": "Run composer"
-      },
-      {
-        "type": "compose",
-        "entry": "./vendor/bin/pint --config pint.json",
-        "names": [
-          "pint"
-        ],
-        "containers": [
-          {
-            "name": "php"
-          }
-        ],
-        "description": "Run artisan"
-      },
-      {
-        "type": "compose",
-        "entry": "yarn",
-        "names": [
-          "yarn"
-        ],
-        "containers": [
-          {
-            "name": "node"
-          }
-        ],
-        "description": "Run yarn"
-      }
-    ]
-  }
+        "customs": [
+            {
+                "type": "compose",
+                "entry": "sh",
+                "containers": [
+                    {
+                        "name": "php"
+                    }
+                ],
+                "description": "Enter in php container shell"
+            },
+            {
+                "type": "compose",
+                "entry": "sh",
+                "names": ["sh:node"],
+                "containers": [
+                    {
+                        "name": "node"
+                    }
+                ],
+                "description": "Enter in node container shell"
+            },
+            {
+                "type": "compose",
+                "entry": "php",
+                "containers": [
+                    {
+                        "name": "php"
+                    }
+                ],
+                "description": "Run php"
+            },
+            {
+                "type": "compose",
+                "entry": "php artisan",
+                "names": [
+                    "artisan",
+                    "a"
+                ],
+                "containers": [
+                    {
+                        "name": "php"
+                    }
+                ],
+                "description": "Run artisan"
+            },
+            {
+                "type": "compose",
+                "entry": "composer",
+                "names": [
+                    "composer",
+                    "c"
+                ],
+                "containers": [
+                    {
+                        "name": "php"
+                    }
+                ],
+                "description": "Run composer"
+            },
+            {
+                "type": "compose",
+                "entry": "./vendor/bin/pint --config pint.json",
+                "names": [
+                    "pint"
+                ],
+                "containers": [
+                    {
+                        "name": "php"
+                    }
+                ],
+                "description": "Run artisan"
+            },
+            {
+                "type": "compose",
+                "entry": "yarn",
+                "names": [
+                    "yarn"
+                ],
+                "containers": [
+                    {
+                        "name": "node"
+                    }
+                ],
+                "description": "Run yarn"
+            }
+        ]
+    }
 }

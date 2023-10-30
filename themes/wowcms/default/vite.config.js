@@ -10,16 +10,14 @@ export default defineConfig({
     },
     plugins: [
         laravel({
-            input: [],
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+            ],
             refresh: [
                 ...refreshPaths,
-                'app/Filament/**',
-                'app/Forms/Components/**',
-                'app/Livewire/**',
-                'app/Providers/Filament/**',
-                'app/Tables/Columns/**',
                 'lang/**',
-                'themes/**/resources/**'
+                'resources/**'
             ],
         }),
     ],

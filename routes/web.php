@@ -14,10 +14,10 @@
 use App\Http\Controllers\Auth\LogoutController;
 use App\Livewire\Pages\Auth\Login;
 use App\Livewire\Pages\Home;
-use Hexadog\ThemesManager\Facades\ThemesManager;
 
-ThemesManager::set('wowcms/default');
-
-Route::get('/', Home::class)->name('home');
-Route::get('/login', Login::class)->name('login');
-Route::get('/logout', LogoutController::class)->name('logout');
+Route::middleware('theme:wowcms/default')
+    ->group(function () {
+        Route::get('/', Home::class)->name('home');
+        Route::get('/login', Login::class)->name('login');
+        Route::get('/logout', LogoutController::class)->name('logout');
+    });

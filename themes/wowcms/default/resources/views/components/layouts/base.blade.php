@@ -19,7 +19,7 @@
     </style>
 
     @filamentStyles
-    @vite('resources/css/app.css')
+    <link href="{!! \Hexadog\ThemesManager\Facades\ThemesManager::vite('resources/css/app.css') !!}" rel="">
 </head>
 
 <body class="antialiased">
@@ -28,6 +28,6 @@
 
 @livewire('notifications')
 @filamentScripts
-@vite('resources/js/app.js')
+@vite('resources/js/app.js', 'themes/wowcms/default/build')
 </body>
 </html>

@@ -20,7 +20,6 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -34,10 +33,6 @@ class AdminPanelProvider extends PanelProvider
             ->tenant(Realm::class, 'id')
             ->tenantRegistration(CreateRealm::class)
             ->tenantProfile(EditRealm::class)
-            ->renderHook(
-                'panels::head.end',
-                fn (): string => Blade::render("@vite('resources/css/app.css')")
-            )
             ->navigationItems([
                 NavigationItem::make()
                     ->label(fn () => __('labels.leave_admin'))
