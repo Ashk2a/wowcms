@@ -13,7 +13,6 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Vite;
 
 class CharacterResource extends Resource
 {
@@ -66,7 +65,7 @@ class CharacterResource extends Resource
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\ImageColumn::make('race')
                     ->size(25)
-                    ->getStateUsing(fn (Character $record) => Vite::asset(
+                    ->getStateUsing(fn (Character $record) => theme_vite_url(
                         sprintf(
                             self::IMAGE_RACE_PATH,
                             $record->race,
@@ -75,7 +74,7 @@ class CharacterResource extends Resource
                     )),
                 Tables\Columns\ImageColumn::make('class')
                     ->size(25)
-                    ->getStateUsing(fn (Character $record) => Vite::asset(
+                    ->getStateUsing(fn (Character $record) => theme_vite_url(
                         sprintf(
                             self::IMAGE_CLASS_PATH,
                             $record->class,

@@ -1,0 +1,288 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-9ccdf29e.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
+  },
+  "resources/images/classes/1.png": {
+    "file": "assets/1-45e29924.png",
+    "src": "resources/images/classes/1.png"
+  },
+  "resources/images/classes/10.png": {
+    "file": "assets/10-8a78f369.png",
+    "src": "resources/images/classes/10.png"
+  },
+  "resources/images/classes/11.png": {
+    "file": "assets/11-0a3da6f5.png",
+    "src": "resources/images/classes/11.png"
+  },
+  "resources/images/classes/12.png": {
+    "file": "assets/12-5a854e8f.png",
+    "src": "resources/images/classes/12.png"
+  },
+  "resources/images/classes/13.png": {
+    "file": "assets/13-110b70e3.png",
+    "src": "resources/images/classes/13.png"
+  },
+  "resources/images/classes/2.png": {
+    "file": "assets/2-c1ba09f5.png",
+    "src": "resources/images/classes/2.png"
+  },
+  "resources/images/classes/3.png": {
+    "file": "assets/3-0781d415.png",
+    "src": "resources/images/classes/3.png"
+  },
+  "resources/images/classes/4.png": {
+    "file": "assets/4-8ef195c8.png",
+    "src": "resources/images/classes/4.png"
+  },
+  "resources/images/classes/5.png": {
+    "file": "assets/5-22bfa614.png",
+    "src": "resources/images/classes/5.png"
+  },
+  "resources/images/classes/6.png": {
+    "file": "assets/6-f825730d.png",
+    "src": "resources/images/classes/6.png"
+  },
+  "resources/images/classes/7.png": {
+    "file": "assets/7-c495878a.png",
+    "src": "resources/images/classes/7.png"
+  },
+  "resources/images/classes/8.png": {
+    "file": "assets/8-63b7a01c.png",
+    "src": "resources/images/classes/8.png"
+  },
+  "resources/images/classes/9.png": {
+    "file": "assets/9-c79bed0e.png",
+    "src": "resources/images/classes/9.png"
+  },
+  "resources/images/factions/1.png": {
+    "file": "assets/1-98f43436.png",
+    "src": "resources/images/factions/1.png"
+  },
+  "resources/images/factions/2.png": {
+    "file": "assets/2-ca9cc13a.png",
+    "src": "resources/images/factions/2.png"
+  },
+  "resources/images/races/1-0.png": {
+    "file": "assets/1-0-442bd60e.png",
+    "src": "resources/images/races/1-0.png"
+  },
+  "resources/images/races/1-1.png": {
+    "file": "assets/1-1-7b83f988.png",
+    "src": "resources/images/races/1-1.png"
+  },
+  "resources/images/races/10-0.png": {
+    "file": "assets/10-0-169e5c16.png",
+    "src": "resources/images/races/10-0.png"
+  },
+  "resources/images/races/10-1.png": {
+    "file": "assets/10-1-5404b2de.png",
+    "src": "resources/images/races/10-1.png"
+  },
+  "resources/images/races/11-0.png": {
+    "file": "assets/11-0-a86f1feb.png",
+    "src": "resources/images/races/11-0.png"
+  },
+  "resources/images/races/11-1.png": {
+    "file": "assets/11-1-ad5f6417.png",
+    "src": "resources/images/races/11-1.png"
+  },
+  "resources/images/races/2-0.png": {
+    "file": "assets/2-0-dbea5648.png",
+    "src": "resources/images/races/2-0.png"
+  },
+  "resources/images/races/2-1.png": {
+    "file": "assets/2-1-b5b081f3.png",
+    "src": "resources/images/races/2-1.png"
+  },
+  "resources/images/races/22-0.png": {
+    "file": "assets/22-0-8a82ad1e.png",
+    "src": "resources/images/races/22-0.png"
+  },
+  "resources/images/races/22-1.png": {
+    "file": "assets/22-1-2e81a050.png",
+    "src": "resources/images/races/22-1.png"
+  },
+  "resources/images/races/24-0.png": {
+    "file": "assets/24-0-efe93f89.png",
+    "src": "resources/images/races/25-0.png"
+  },
+  "resources/images/races/24-1.png": {
+    "file": "assets/24-1-24ac6e91.png",
+    "src": "resources/images/races/25-1.png"
+  },
+  "resources/images/races/25-0.png": {
+    "file": "assets/24-0-efe93f89.png",
+    "src": "resources/images/races/25-0.png"
+  },
+  "resources/images/races/25-1.png": {
+    "file": "assets/24-1-24ac6e91.png",
+    "src": "resources/images/races/25-1.png"
+  },
+  "resources/images/races/26-0.png": {
+    "file": "assets/24-0-efe93f89.png",
+    "src": "resources/images/races/25-0.png"
+  },
+  "resources/images/races/26-1.png": {
+    "file": "assets/24-1-24ac6e91.png",
+    "src": "resources/images/races/25-1.png"
+  },
+  "resources/images/races/27-0.png": {
+    "file": "assets/27-0-f689e532.png",
+    "src": "resources/images/races/27-0.png"
+  },
+  "resources/images/races/27-1.png": {
+    "file": "assets/27-1-dcef23bc.png",
+    "src": "resources/images/races/27-1.png"
+  },
+  "resources/images/races/28-0.png": {
+    "file": "assets/28-0-a9438beb.png",
+    "src": "resources/images/races/28-0.png"
+  },
+  "resources/images/races/28-1.png": {
+    "file": "assets/28-1-8221ee7b.png",
+    "src": "resources/images/races/28-1.png"
+  },
+  "resources/images/races/29-0.png": {
+    "file": "assets/29-0-780be665.png",
+    "src": "resources/images/races/29-0.png"
+  },
+  "resources/images/races/29-1.png": {
+    "file": "assets/29-1-e533ec4a.png",
+    "src": "resources/images/races/29-1.png"
+  },
+  "resources/images/races/3-0.png": {
+    "file": "assets/3-0-09861ec6.png",
+    "src": "resources/images/races/3-0.png"
+  },
+  "resources/images/races/3-1.png": {
+    "file": "assets/3-1-33d384f8.png",
+    "src": "resources/images/races/3-1.png"
+  },
+  "resources/images/races/30-0.png": {
+    "file": "assets/30-0-4e59a92f.png",
+    "src": "resources/images/races/30-0.png"
+  },
+  "resources/images/races/30-1.png": {
+    "file": "assets/30-1-0183285d.png",
+    "src": "resources/images/races/30-1.png"
+  },
+  "resources/images/races/31-0.png": {
+    "file": "assets/31-0-7ac92e8d.png",
+    "src": "resources/images/races/31-0.png"
+  },
+  "resources/images/races/31-1.png": {
+    "file": "assets/31-1-80e79eee.png",
+    "src": "resources/images/races/31-1.png"
+  },
+  "resources/images/races/32-0.png": {
+    "file": "assets/32-0-3377f1cb.png",
+    "src": "resources/images/races/32-0.png"
+  },
+  "resources/images/races/32-1.png": {
+    "file": "assets/32-1-1fee8a77.png",
+    "src": "resources/images/races/32-1.png"
+  },
+  "resources/images/races/34-0.png": {
+    "file": "assets/34-0-202253df.png",
+    "src": "resources/images/races/34-0.png"
+  },
+  "resources/images/races/34-1.png": {
+    "file": "assets/34-1-0582132b.png",
+    "src": "resources/images/races/34-1.png"
+  },
+  "resources/images/races/35-0.png": {
+    "file": "assets/35-0-870a89d0.png",
+    "src": "resources/images/races/35-0.png"
+  },
+  "resources/images/races/35-1.png": {
+    "file": "assets/35-1-ece7cd2c.png",
+    "src": "resources/images/races/35-1.png"
+  },
+  "resources/images/races/36-0.png": {
+    "file": "assets/36-0-0a6391e8.png",
+    "src": "resources/images/races/36-0.png"
+  },
+  "resources/images/races/36-1.png": {
+    "file": "assets/36-1-4e2282c8.png",
+    "src": "resources/images/races/36-1.png"
+  },
+  "resources/images/races/37-0.png": {
+    "file": "assets/37-0-9a0277a6.png",
+    "src": "resources/images/races/37-0.png"
+  },
+  "resources/images/races/37-1.png": {
+    "file": "assets/37-1-5a2bb3ff.png",
+    "src": "resources/images/races/37-1.png"
+  },
+  "resources/images/races/4-0.png": {
+    "file": "assets/4-0-a9298a8e.png",
+    "src": "resources/images/races/4-0.png"
+  },
+  "resources/images/races/4-1.png": {
+    "file": "assets/4-1-5c375865.png",
+    "src": "resources/images/races/4-1.png"
+  },
+  "resources/images/races/5-0.png": {
+    "file": "assets/5-0-3884f194.png",
+    "src": "resources/images/races/5-0.png"
+  },
+  "resources/images/races/5-1.png": {
+    "file": "assets/5-1-65f78c43.png",
+    "src": "resources/images/races/5-1.png"
+  },
+  "resources/images/races/52-0.png": {
+    "file": "assets/52-0-51cb2988.png",
+    "src": "resources/images/races/70-0.png"
+  },
+  "resources/images/races/52-1.png": {
+    "file": "assets/52-1-1844d91d.png",
+    "src": "resources/images/races/70-1.png"
+  },
+  "resources/images/races/6-0.png": {
+    "file": "assets/6-0-dfececae.png",
+    "src": "resources/images/races/6-0.png"
+  },
+  "resources/images/races/6-1.png": {
+    "file": "assets/6-1-71e79560.png",
+    "src": "resources/images/races/6-1.png"
+  },
+  "resources/images/races/7-0.png": {
+    "file": "assets/7-0-017058a8.png",
+    "src": "resources/images/races/7-0.png"
+  },
+  "resources/images/races/7-1.png": {
+    "file": "assets/7-1-35bc2b3f.png",
+    "src": "resources/images/races/7-1.png"
+  },
+  "resources/images/races/70-0.png": {
+    "file": "assets/52-0-51cb2988.png",
+    "src": "resources/images/races/70-0.png"
+  },
+  "resources/images/races/70-1.png": {
+    "file": "assets/52-1-1844d91d.png",
+    "src": "resources/images/races/70-1.png"
+  },
+  "resources/images/races/8-0.png": {
+    "file": "assets/8-0-55bfaf20.png",
+    "src": "resources/images/races/8-0.png"
+  },
+  "resources/images/races/8-1.png": {
+    "file": "assets/8-1-5f680653.png",
+    "src": "resources/images/races/8-1.png"
+  },
+  "resources/images/races/9-0.png": {
+    "file": "assets/9-0-11b3ebe7.png",
+    "src": "resources/images/races/9-0.png"
+  },
+  "resources/images/races/9-1.png": {
+    "file": "assets/9-1-e0675086.png",
+    "src": "resources/images/races/9-1.png"
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-4ed993c7.js",
+    "isEntry": true,
+    "src": "resources/js/app.js"
+  }
+}

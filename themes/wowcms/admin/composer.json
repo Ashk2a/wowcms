@@ -1,0 +1,19 @@
+{
+    "name": "wowcms/admin",
+    "description": "",
+    "type": "laravel-theme",
+    "version": "1",
+    "minimum-stability": "stable",
+    "authors": [
+        {
+            "name": "Ashk",
+            "email": "ashk@ashkraft.com"
+        }
+    ],
+    "extra": {
+        "theme": {
+            "parent": "",
+            "active": true
+        }
+    }
+}
