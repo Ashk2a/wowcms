@@ -16,13 +16,14 @@ readonly class LoadThemeAssetFromVite
      * @throws Exception
      */
     public function __invoke(
-        string|array $entrypoints,
-        string $buildDirectory = 'public/build',
-        string $hotFilePath = 'public/hot'
+        array|string $entrypoints,
+        string $buildDirectory = 'build',
+        string $hotFilePath = 'hot'
     ): string {
         $entrypoints = is_string($entrypoints) ? explode(',', $entrypoints) : $entrypoints;
-        $realBuildDirectory = ThemesManager::current()?->getPath($buildDirectory) ?? $buildDirectory;
-        $realHotFilePath = ThemesManager::current()?->getPath($hotFilePath) ?? $hotFilePath;
+        $currentTheme = ThemesManager::current();
+        $realBuildDirectory = $currentTheme?->getAssetsPath($buildDirectory) ?? $buildDirectory;
+        $realHotFilePath = $currentTheme?->getAssetsPath($hotFilePath) ?? $hotFilePath;
 
         return $this->vite
             ->useHotFile($realHotFilePath)

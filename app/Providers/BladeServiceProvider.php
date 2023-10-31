@@ -12,7 +12,7 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::directive('themeVite', function ($expression) {
+        Blade::directive('themeVite', static function ($expression) {
             return "<?php echo resolve(\App\Actions\Theme\LoadThemeAssetFromVite::class)($expression); ?>";
         });
     }

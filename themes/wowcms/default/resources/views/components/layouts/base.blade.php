@@ -19,7 +19,7 @@
     </style>
 
     @filamentStyles
-    @themeVite('resources/css/app.css', 'themes/wowcms/default/build')
+    @themeVite('resources/css/app.css')
 </head>
 
 <body class="antialiased">
@@ -28,6 +28,7 @@
 
 @livewire('notifications')
 @filamentScripts
+@themeVite('resources/js/app.js')
 
 </body>
 </html>
