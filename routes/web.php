@@ -12,10 +12,11 @@
 */
 
 use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Middleware\LoadAppTheme;
 use App\Livewire\Pages\Auth\Login;
 use App\Livewire\Pages\Home;
 
-Route::middleware('theme:wowcms/default')
+Route::middleware(LoadAppTheme::class)
     ->group(function () {
         Route::get('/', Home::class)->name('home');
         Route::get('/login', Login::class)->name('login');

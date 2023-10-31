@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Admin\Pages\Realms\CreateRealm;
 use App\Filament\Admin\Pages\Realms\EditRealm;
+use App\Http\Middleware\LoadAdminTheme;
 use App\Models\Realm;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -62,6 +63,9 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->persistentMiddleware([
+                LoadAdminTheme::class,
+            ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -70,7 +74,7 @@ class AdminPanelProvider extends PanelProvider
                 ShareErrorsFromSession::class,
                 VerifyCsrfToken::class,
                 SubstituteBindings::class,
-                'theme:wowcms/admin', // TODO: change that when theme can be manage via database
+                LoadAdminTheme::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])

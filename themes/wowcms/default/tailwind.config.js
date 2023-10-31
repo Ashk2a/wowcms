@@ -4,5 +4,7 @@ export default {
     presets: [preset],
     content: [
         './resources/views/**/*.blade.php',
+        './../../../app/Filament/**/*.php',
+        './../../../vendor/filament/**/*.blade.php',
     ],
 }

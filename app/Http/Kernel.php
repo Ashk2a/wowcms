@@ -10,7 +10,6 @@ use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\ValidateSignature;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Hexadog\ThemesManager\Http\Middleware\ThemeLoader;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
@@ -90,7 +89,6 @@ class Kernel extends HttpKernel
         'password.confirm' => RequirePassword::class,
         'precognitive' => HandlePrecognitiveRequests::class,
         'signed' => ValidateSignature::class,
-        'theme' => ThemeLoader::class,
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
     ];
