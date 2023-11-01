@@ -1,0 +1,34 @@
+--- /dev/null
++++ ../src/Resources/Resource.php
+@@ -86,6 +86,8 @@
+ 
+     protected static ?string $slug = null;
+ 
++    protected static bool $shouldApplyTenantRelationship = true;
++
+     protected static ?string $tenantOwnershipRelationshipName = null;
+ 
+     protected static ?string $tenantRelationshipName = null;
+@@ -307,8 +309,9 @@
+     public static function getEloquentQuery(): Builder
+     {
+         $query = static::getModel()::query();
++        $tenant = Filament::getTenant();
+ 
+-        if ($tenant = Filament::getTenant()) {
++        if ($tenant && static::shouldApplyTenantRelationship()) {
+             static::scopeEloquentQueryToTenant($query, $tenant);
+         }
+ 
+@@ -745,6 +748,11 @@
+     public static function isDiscovered(): bool
+     {
+         return static::$isDiscovered;
++    }
++
++    public static function shouldApplyTenantRelationship(): bool
++    {
++        return static::$shouldApplyTenantRelationship;
+     }
+ 
+     public static function getTenantOwnershipRelationshipName(): string

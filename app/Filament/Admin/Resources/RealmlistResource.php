@@ -3,11 +3,9 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Core\Filament\Resources\HasSideTemplateForm;
-use App\Core\Filament\Resources\SharedTenantResource;
 use App\Filament\Admin\Resources\RealmlistResource\Pages;
 use App\Models\Game\Auth\Realmlist;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -15,7 +13,6 @@ use Filament\Tables\Table;
 class RealmlistResource extends Resource
 {
     use HasSideTemplateForm;
-    use SharedTenantResource;
 
     //##################################################################################################################
     // ATTRIBUTES
@@ -26,6 +23,8 @@ class RealmlistResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationIcon = 'heroicon-o-list-bullet';
+
+    protected static bool $shouldApplyTenantRelationship = false;
 
     //##################################################################################################################
     // FORM

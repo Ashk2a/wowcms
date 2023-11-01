@@ -3,7 +3,6 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Core\Filament\Resources\HasSideTemplateForm;
-use App\Core\Filament\Resources\SharedTenantResource;
 use App\Filament\Admin\Resources\CharacterResource\Pages;
 use App\Models\Game\Character\Character;
 use App\Tables\Columns\DateColumn;
@@ -16,7 +15,6 @@ use Illuminate\Database\Eloquent\Builder;
 class CharacterResource extends Resource
 {
     use HasSideTemplateForm;
-    use SharedTenantResource;
 
     public const IMAGE_RACE_PATH = 'resources/images/races/%s-%s.png';
 
@@ -31,6 +29,8 @@ class CharacterResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static bool $shouldApplyTenantRelationship = false;
 
     //##################################################################################################################
     // FORM

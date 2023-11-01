@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-9ccdf29e.css",
+    "file": "assets/app-537fb715.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
@@ -106,27 +106,27 @@
   },
   "resources/images/races/24-0.png": {
     "file": "assets/24-0-efe93f89.png",
-    "src": "resources/images/races/25-0.png"
+    "src": "resources/images/races/26-0.png"
   },
   "resources/images/races/24-1.png": {
     "file": "assets/24-1-24ac6e91.png",
-    "src": "resources/images/races/25-1.png"
+    "src": "resources/images/races/26-1.png"
   },
   "resources/images/races/25-0.png": {
     "file": "assets/24-0-efe93f89.png",
-    "src": "resources/images/races/25-0.png"
+    "src": "resources/images/races/26-0.png"
   },
   "resources/images/races/25-1.png": {
     "file": "assets/24-1-24ac6e91.png",
-    "src": "resources/images/races/25-1.png"
+    "src": "resources/images/races/26-1.png"
   },
   "resources/images/races/26-0.png": {
     "file": "assets/24-0-efe93f89.png",
-    "src": "resources/images/races/25-0.png"
+    "src": "resources/images/races/26-0.png"
   },
   "resources/images/races/26-1.png": {
     "file": "assets/24-1-24ac6e91.png",
-    "src": "resources/images/races/25-1.png"
+    "src": "resources/images/races/26-1.png"
   },
   "resources/images/races/27-0.png": {
     "file": "assets/27-0-f689e532.png",

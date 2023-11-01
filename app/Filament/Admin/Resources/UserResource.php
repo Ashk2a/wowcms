@@ -3,13 +3,11 @@
 namespace App\Filament\Admin\Resources;
 
 use App\Core\Filament\Resources\HasSideTemplateForm;
-use App\Core\Filament\Resources\SharedTenantResource;
 use App\Filament\Admin\Resources\UserResource\Pages;
 use App\Filament\Admin\Resources\UserResource\RelationManagers\AccountsRelationManager;
 use App\Models\User;
 use App\Tables\Columns\DateColumn;
 use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -18,7 +16,6 @@ use Illuminate\Database\Eloquent\Builder;
 class UserResource extends Resource
 {
     use HasSideTemplateForm;
-    use SharedTenantResource;
 
     //##################################################################################################################
     // ATTRIBUTES
@@ -29,6 +26,8 @@ class UserResource extends Resource
     protected static ?string $recordTitleAttribute = 'email';
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+
+    protected static bool $shouldApplyTenantRelationship = false;
 
     //##################################################################################################################
     // FORM

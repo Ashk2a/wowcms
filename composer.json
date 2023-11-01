@@ -73,6 +73,12 @@
         ]
     },
     "extra": {
+        "patches": {
+            "filament/filament": [
+                "patches/filament-filament-src-resources-resource-php.patch",
+                "patches/filament-filament-src-resources-pages-createrecord-php.patch"
+            ]
+        },
         "laravel": {
             "dont-discover": []
         }

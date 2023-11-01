@@ -2,12 +2,15 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Core\Filament\Resources\SharedTenantResource;
 use Z3d0X\FilamentFabricator\Resources\PageResource as BasePageResource;
 
 class PageResource extends BasePageResource
 {
-    use SharedTenantResource;
+    //##################################################################################################################
+    // ATTRIBUTES
+    //##################################################################################################################
+
+    protected static bool $shouldApplyTenantRelationship = false;
 
     //##################################################################################################################
     // PAGES
