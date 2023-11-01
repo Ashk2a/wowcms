@@ -1,7 +1,8 @@
 {
     "preset": "laravel",
     "exclude": [
-        "'*.blade.php"
+        "'*.blade.php",
+        "dev"
     ],
     "rules": {
         "array_syntax": {
